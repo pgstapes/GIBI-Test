@@ -62,25 +62,35 @@
         }
 
         .header-nav-button, .hamburger-menu {
-            background: none;
-            border: none;
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px solid rgba(102, 126, 234, 0.2);
             cursor: pointer;
-            padding: 8px;
+            padding: 10px 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
+            min-width: 60px;
             height: 40px;
-            border-radius: 6px;
+            border-radius: 20px;
             transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #667eea;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
         }
 
         .header-nav-button:hover, .hamburger-menu:hover {
-            background: rgba(102, 126, 234, 0.1);
+            background: rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
         }
 
         .header-nav-button.active, .hamburger-menu.active {
-            background: rgba(102, 126, 234, 0.2);
+            background: rgba(102, 126, 234, 0.25);
+            border-color: rgba(102, 126, 234, 0.6);
+            color: #4a5fd8;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
         }
 
         /* Vote Symbol - Simple thumbs up and down */
@@ -177,19 +187,25 @@
         /* Hamburger Menu */
         .hamburger-menu {
             flex-direction: column;
-            gap: 4px;
+            gap: 3px;
+            padding: 8px 12px;
+            min-width: 50px;
         }
 
         .hamburger-menu span {
-            width: 20px;
+            width: 18px;
             height: 2px;
-            background: #333;
-            border-radius: 1px;
+            background: #667eea;
+            border-radius: 2px;
             transition: all 0.3s ease;
         }
 
+        .hamburger-menu:hover span {
+            background: #4a5fd8;
+        }
+
         .hamburger-menu.active span {
-            background: #667eea;
+            background: #4a5fd8;
         }
 
         .main-content {
@@ -995,26 +1011,11 @@
         }
 
         .submit-button {
-            background: #2ed573;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: transform 0.2s;
-            width: 100%;
+            /* Header button styles are inherited from .header-nav-button */
         }
 
         .submit-button:hover {
-            transform: scale(1.05);
-        }
-
-        .submit-button:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
+            /* Header button hover styles are inherited from .header-nav-button:hover */
         }
 
         .quality-control-panel {
@@ -2481,6 +2482,11 @@
                 transform: scale(1);
             }
         }
+
+        .header-submit-button {
+            /* No extra styles needed, but this class is for clarity and future tweaks */
+        }
+        /* .submit-button styles below only affect the form button, not the header */
     </style>
 </head>
 <body>
@@ -2490,18 +2496,8 @@
             <span class="logo-subtitle">Good Idea Bad Idea</span>
         </div>
         <div class="header-buttons">
-            <button class="header-nav-button vote-button" onclick="showTab('voting')" title="Vote on Ideas">
-                <div class="vote-symbol">
-                    <span class="thumb-up"></span>
-                    <span class="thumb-down"></span>
-                </div>
-            </button>
-            <button class="header-nav-button submit-button" onclick="showTab('submit')" title="Submit Idea">
-                <div class="submit-symbol">
-                    <div class="speech-bubble"></div>
-                    <div class="question-mark">?</div>
-                </div>
-            </button>
+            <button class="header-nav-button vote-button" onclick="showTab('voting')" title="Vote">Vote</button>
+            <button class="header-nav-button header-submit-button" onclick="showTab('submit')" title="Submit">Submit</button>
             <button class="hamburger-menu" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
@@ -2906,8 +2902,8 @@
                 if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 100) {
                     const idea = shuffledIdeas[currentIdeaIndex];
                     if (idea.type === 'choice') {
-                        // For choice questions, swipe right = choice A, swipe left = choice B
-                        if (diffX > 0) {
+                        // For choice questions, swipe left = choice A, swipe right = choice B
+                        if (diffX < 0) {
                             voteChoice('a');
                         } else {
                             voteChoice('b');
@@ -2955,8 +2951,8 @@
                 if (Math.abs(diffX) > 100) {
                     const idea = shuffledIdeas[currentIdeaIndex];
                     if (idea.type === 'choice') {
-                        // For choice questions, drag right = choice A, drag left = choice B
-                        if (diffX > 0) {
+                        // For choice questions, drag left = choice A, drag right = choice B
+                        if (diffX < 0) {
                             voteChoice('a');
                         } else {
                             voteChoice('b');
@@ -3141,6 +3137,502 @@
                 type: "choice",
                 choiceA: "Freelance - Freedom and higher income",
                 choiceB: "Full-time - Stability and benefits",
+                media: null
+            },
+            {
+                id: 16,
+                title: "Should I launch my indie game on Steam Early Access?",
+                description: "I've been developing a game for 18 months and considering Steam Early Access to get player feedback and funding. It could help with development, but I'm worried about negative reviews if the game isn't polished enough yet.",
+                category: "Gaming",
+                author: "Carlos",
+                votes: { good: 68, bad: 32 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 17,
+                title: "React vs Vue for my next project",
+                description: "I'm starting a new web project and need to choose between React and Vue. React has a larger ecosystem and job market, but Vue is easier to learn and has better documentation. Which framework should I invest in?",
+                category: "Tech",
+                author: "Maria",
+                votes: { a: 42, b: 35 },
+                type: "choice",
+                choiceA: "React - Larger ecosystem and job market",
+                choiceB: "Vue - Easier learning curve and better docs",
+                media: null
+            },
+            {
+                id: 18,
+                title: "Should I start a food blog?",
+                description: "I love cooking and photography, and I'm thinking about starting a food blog. It could be a creative outlet and potentially generate income, but it's a crowded space and requires consistent content creation.",
+                category: "Creative Arts",
+                author: "Jennifer",
+                votes: { good: 82, bad: 18 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 19,
+                title: "Meditation vs exercise for stress relief",
+                description: "I'm dealing with high stress at work and need to choose between starting a meditation practice or increasing my exercise routine. Both have benefits, but I have limited time to commit to new habits.",
+                category: "Health",
+                author: "Ryan",
+                votes: { a: 28, b: 72 },
+                type: "choice",
+                choiceA: "Meditation - Mental clarity and calm",
+                choiceB: "Exercise - Physical release and endorphins",
+                media: null
+            },
+            {
+                id: 20,
+                title: "Should I invest in cryptocurrency?",
+                description: "I have some extra money and considering cryptocurrency investment. The potential returns are high, but it's very volatile and I'm not sure if I understand the technology well enough.",
+                category: "Finance",
+                author: "Amanda",
+                votes: { good: 34, bad: 66 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 21,
+                title: "Solo travel vs group travel",
+                description: "I'm planning a trip to Europe and debating between traveling alone or joining a group tour. Solo travel offers freedom and authenticity, but group travel provides safety and social connections.",
+                category: "Lifestyle",
+                author: "Daniel",
+                votes: { a: 65, b: 35 },
+                type: "choice",
+                choiceA: "Solo - Freedom and authentic experience",
+                choiceB: "Group - Safety and social connections",
+                media: null
+            },
+            {
+                id: 22,
+                title: "Should I start a side hustle?",
+                description: "I'm thinking about starting a side business to supplement my income. I have skills in graphic design and could freelance, but I'm worried about burnout and time management.",
+                category: "Business",
+                author: "Jessica",
+                votes: { good: 71, bad: 29 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 23,
+                title: "iPhone vs Android for my next phone",
+                description: "I need a new phone and can't decide between iPhone and Android. iPhone has better ecosystem integration, but Android offers more customization and better value for money.",
+                category: "Tech",
+                author: "Michael",
+                votes: { a: 48, b: 52 },
+                type: "choice",
+                choiceA: "iPhone - Better ecosystem and security",
+                choiceB: "Android - More customization and value",
+                media: null
+            },
+            {
+                id: 24,
+                title: "Should I join a startup or stay at a big company?",
+                description: "I have an offer from a promising startup but I'm currently at a stable large company. The startup offers equity and growth potential, but comes with risk and uncertainty.",
+                category: "Professional",
+                author: "Sarah",
+                votes: { a: 55, b: 45 },
+                type: "choice",
+                choiceA: "Startup - Equity and growth potential",
+                choiceB: "Big company - Stability and benefits",
+                media: null
+            },
+            {
+                id: 25,
+                title: "Should I learn to play guitar?",
+                description: "I've always wanted to learn guitar and have some free time now. It would be a creative outlet and social skill, but requires consistent practice and I'm not sure if I'll stick with it.",
+                category: "Creative Arts",
+                author: "Alex",
+                votes: { good: 85, bad: 15 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 26,
+                title: "Meal prep vs cooking daily",
+                description: "I want to eat healthier and save money on food. Meal prepping would save time during the week, but I enjoy cooking fresh meals. Which approach should I take?",
+                category: "Lifestyle",
+                author: "Emily",
+                votes: { a: 62, b: 38 },
+                type: "choice",
+                choiceA: "Meal prep - Time saving and consistency",
+                choiceB: "Daily cooking - Fresh meals and enjoyment",
+                media: null
+            },
+            {
+                id: 27,
+                title: "Should I start a community garden?",
+                description: "I'm passionate about sustainability and thinking about starting a community garden in my neighborhood. It would bring people together and provide fresh food, but requires significant organization and maintenance.",
+                category: "Community",
+                author: "David",
+                votes: { good: 79, bad: 21 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 28,
+                title: "Electric car vs hybrid for my next vehicle",
+                description: "I need a new car and considering environmental impact. Electric cars have zero emissions but limited range, while hybrids offer flexibility and better infrastructure support.",
+                category: "Environment",
+                author: "Lisa",
+                votes: { a: 41, b: 59 },
+                type: "choice",
+                choiceA: "Electric - Zero emissions and lower fuel costs",
+                choiceB: "Hybrid - Flexibility and better infrastructure",
+                media: null
+            },
+            {
+                id: 29,
+                title: "Should I start a book club?",
+                description: "I love reading and want to start a book club with friends and colleagues. It would encourage reading and social interaction, but requires consistent organization and participation.",
+                category: "Community",
+                author: "Rachel",
+                votes: { good: 88, bad: 12 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 30,
+                title: "Minimalism vs collecting hobbies",
+                description: "I'm trying to simplify my life but also want to pursue my interests. Minimalism would reduce clutter and stress, but collecting and hobbies bring joy and personal expression.",
+                category: "Lifestyle",
+                author: "Mark",
+                votes: { a: 33, b: 67 },
+                type: "choice",
+                choiceA: "Minimalism - Less clutter and stress",
+                choiceB: "Collecting - Joy and personal expression",
+                media: null
+            },
+            {
+                id: 31,
+                title: "Should I start a YouTube channel about cooking?",
+                description: "I'm a passionate home cook and thinking about starting a cooking YouTube channel. It could be fun and potentially profitable, but requires equipment, editing skills, and consistent content creation.",
+                category: "Creative Arts",
+                author: "Sophia",
+                votes: { good: 74, bad: 26 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 32,
+                title: "Public speaking course vs self-study",
+                description: "I need to improve my public speaking skills for work. A course would provide structure and feedback, but self-study is cheaper and more flexible. Which approach should I take?",
+                category: "Professional",
+                author: "Chris",
+                votes: { a: 69, b: 31 },
+                type: "choice",
+                choiceA: "Course - Structure and professional feedback",
+                choiceB: "Self-study - Cost-effective and flexible",
+                media: null
+            },
+            {
+                id: 33,
+                title: "Should I start composting?",
+                description: "I want to reduce my environmental impact and thinking about starting a compost bin. It would reduce waste and create garden soil, but requires space, time, and proper maintenance.",
+                category: "Environment",
+                author: "Emma",
+                votes: { good: 91, bad: 9 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 34,
+                title: "Gaming PC vs console for entertainment",
+                description: "I want to upgrade my gaming setup and can't decide between building a PC or buying a console. PC offers better graphics and versatility, but consoles are simpler and more social.",
+                category: "Gaming",
+                author: "Jake",
+                votes: { a: 54, b: 46 },
+                type: "choice",
+                choiceA: "Gaming PC - Better graphics and versatility",
+                choiceB: "Console - Simplicity and social gaming",
+                media: null
+            },
+            {
+                id: 35,
+                title: "Should I start a photography business?",
+                description: "I have photography skills and considering starting a part-time photography business. It could be profitable and creative, but requires marketing, equipment investment, and dealing with clients.",
+                category: "Creative Arts",
+                author: "Nina",
+                votes: { good: 66, bad: 34 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 36,
+                title: "Morning person vs night owl schedule",
+                description: "I'm trying to optimize my daily routine and need to choose between waking up early or staying up late. Early mornings offer productivity and quiet time, but I'm naturally more creative at night.",
+                category: "Lifestyle",
+                author: "Tom",
+                votes: { a: 58, b: 42 },
+                type: "choice",
+                choiceA: "Morning person - Productivity and quiet time",
+                choiceB: "Night owl - Creativity and natural rhythm",
+                media: null
+            },
+            {
+                id: 37,
+                title: "Should I learn to code?",
+                description: "I'm interested in technology and considering learning to code. It could open up career opportunities and help me build my own projects, but requires significant time investment and continuous learning.",
+                category: "Education",
+                author: "Katie",
+                votes: { good: 87, bad: 13 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 38,
+                title: "Local business vs online shopping",
+                description: "I'm trying to be more conscious about my shopping habits. Supporting local businesses helps the community, but online shopping is more convenient and often cheaper.",
+                category: "Community",
+                author: "Mike",
+                votes: { a: 71, b: 29 },
+                type: "choice",
+                choiceA: "Local business - Support community and quality",
+                choiceB: "Online shopping - Convenience and savings",
+                media: null
+            },
+            {
+                id: 39,
+                title: "Should I start a fitness challenge group?",
+                description: "I want to get healthier and thinking about organizing a fitness challenge with friends. It would provide motivation and accountability, but requires coordination and commitment from everyone.",
+                category: "Health",
+                author: "Laura",
+                votes: { good: 83, bad: 17 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 40,
+                title: "Digital nomad vs stable location",
+                description: "I have the opportunity to work remotely and considering becoming a digital nomad. It offers travel and adventure, but comes with instability and the challenge of maintaining relationships.",
+                category: "Lifestyle",
+                author: "Sam",
+                votes: { a: 47, b: 53 },
+                type: "choice",
+                choiceA: "Digital nomad - Travel and adventure",
+                choiceB: "Stable location - Relationships and routine",
+                media: null
+            },
+            {
+                id: 41,
+                title: "Should I start a mentoring program?",
+                description: "I have experience in my field and thinking about starting a mentoring program for newcomers. It would be rewarding and help others, but requires time commitment and organization.",
+                category: "Community",
+                author: "Anna",
+                votes: { good: 89, bad: 11 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 42,
+                title: "Solo project vs team collaboration",
+                description: "I'm starting a new project and need to decide between working alone or forming a team. Solo work offers full control, but teamwork brings diverse skills and shared responsibility.",
+                category: "Professional",
+                author: "Carl",
+                votes: { a: 36, b: 64 },
+                type: "choice",
+                choiceA: "Solo project - Full control and vision",
+                choiceB: "Team collaboration - Diverse skills and support",
+                media: null
+            },
+            {
+                id: 43,
+                title: "Should I start a newsletter?",
+                description: "I have knowledge to share in my field and considering starting a newsletter. It could build an audience and establish expertise, but requires consistent writing and content creation.",
+                category: "Creative Arts",
+                author: "Grace",
+                votes: { good: 77, bad: 23 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 44,
+                title: "Traditional publishing vs self-publishing",
+                description: "I'm writing a book and need to choose between traditional publishing or self-publishing. Traditional offers credibility and support, but self-publishing gives creative control and higher royalties.",
+                category: "Creative Arts",
+                author: "Ben",
+                votes: { a: 44, b: 56 },
+                type: "choice",
+                choiceA: "Traditional - Credibility and professional support",
+                choiceB: "Self-publishing - Creative control and higher royalties",
+                media: null
+            },
+            {
+                id: 45,
+                title: "Should I start a local meetup group?",
+                description: "I want to connect with like-minded people in my area and considering starting a meetup group. It would build community and networking opportunities, but requires organization and consistent hosting.",
+                category: "Community",
+                author: "Diana",
+                votes: { good: 81, bad: 19 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 46,
+                title: "Invest in stocks vs real estate",
+                description: "I have some money to invest and debating between stocks and real estate. Stocks offer liquidity and diversification, but real estate provides passive income and tax benefits.",
+                category: "Finance",
+                author: "Robert",
+                votes: { a: 51, b: 49 },
+                type: "choice",
+                choiceA: "Stocks - Liquidity and diversification",
+                choiceB: "Real estate - Passive income and tax benefits",
+                media: null
+            },
+            {
+                id: 47,
+                title: "Should I start a home renovation project?",
+                description: "I want to improve my home and considering a major renovation. It would increase property value and improve living space, but requires significant investment and disruption to daily life.",
+                category: "Lifestyle",
+                author: "Helen",
+                votes: { good: 63, bad: 37 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 48,
+                title: "Open source contribution vs personal projects",
+                description: "I want to improve my coding skills and debating between contributing to open source or working on personal projects. Open source helps the community, but personal projects offer full creative control.",
+                category: "Tech",
+                author: "Paul",
+                votes: { a: 67, b: 33 },
+                type: "choice",
+                choiceA: "Open source - Help community and learn from others",
+                choiceB: "Personal projects - Full creative control and portfolio",
+                media: null
+            },
+            {
+                id: 49,
+                title: "Should I start a family game night tradition?",
+                description: "I want to strengthen family bonds and considering starting a weekly game night. It would create memories and improve relationships, but requires commitment and finding games everyone enjoys.",
+                category: "Family",
+                author: "Megan",
+                votes: { good: 94, bad: 6 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 50,
+                title: "Professional certification vs practical experience",
+                description: "I want to advance my career and debating between getting a professional certification or focusing on gaining practical experience. Certification provides credentials, but experience builds real skills.",
+                category: "Professional",
+                author: "Steve",
+                votes: { a: 39, b: 61 },
+                type: "choice",
+                choiceA: "Certification - Credentials and structured learning",
+                choiceB: "Practical experience - Real skills and problem-solving",
+                media: null
+            },
+            {
+                id: 51,
+                title: "Should I start a book review blog?",
+                description: "I love reading and thinking about starting a book review blog. It would encourage me to read more critically and share recommendations, but requires consistent writing and time management.",
+                category: "Creative Arts",
+                author: "Julia",
+                votes: { good: 86, bad: 14 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 52,
+                title: "Local gym vs home workout setup",
+                description: "I want to get fit and debating between joining a local gym or setting up a home workout space. The gym offers equipment and social motivation, but home setup provides convenience and privacy.",
+                category: "Health",
+                author: "Nick",
+                votes: { a: 43, b: 57 },
+                type: "choice",
+                choiceA: "Local gym - Equipment and social motivation",
+                choiceB: "Home setup - Convenience and privacy",
+                media: null
+            },
+            {
+                id: 53,
+                title: "Should I start a community cleanup initiative?",
+                description: "I'm concerned about litter in my neighborhood and thinking about organizing a community cleanup. It would improve the environment and bring people together, but requires coordination and ongoing commitment.",
+                category: "Environment",
+                author: "Patricia",
+                votes: { good: 92, bad: 8 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 54,
+                title: "Freelance writing vs content creation",
+                description: "I have writing skills and debating between freelance writing for clients or creating my own content. Freelance provides steady income, but content creation offers creative freedom and potential for growth.",
+                category: "Creative Arts",
+                author: "Marcus",
+                votes: { a: 55, b: 45 },
+                type: "choice",
+                choiceA: "Freelance writing - Steady income and client work",
+                choiceB: "Content creation - Creative freedom and growth potential",
+                media: null
+            },
+            {
+                id: 55,
+                title: "Should I start a language exchange program?",
+                description: "I want to learn a new language and thinking about starting a language exchange program. It would provide practice and cultural exchange, but requires finding partners and consistent scheduling.",
+                category: "Education",
+                author: "Isabella",
+                votes: { good: 78, bad: 22 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 56,
+                title: "Traditional dating vs online dating",
+                description: "I'm single and debating between traditional dating methods or online dating apps. Traditional offers organic connections, but online dating provides more options and efficiency.",
+                category: "Lifestyle",
+                author: "Connor",
+                votes: { a: 41, b: 59 },
+                type: "choice",
+                choiceA: "Traditional dating - Organic connections and authenticity",
+                choiceB: "Online dating - More options and efficiency",
+                media: null
+            },
+            {
+                id: 57,
+                title: "Should I start a local business directory?",
+                description: "I want to support local businesses and thinking about creating a directory website. It would help the community and local economy, but requires research, maintenance, and promotion.",
+                category: "Community",
+                author: "Victoria",
+                votes: { good: 84, bad: 16 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 58,
+                title: "Professional networking vs skill development",
+                description: "I want to advance my career and debating between focusing on networking or skill development. Networking opens doors, but skill development provides the foundation for success.",
+                category: "Professional",
+                author: "Aaron",
+                votes: { a: 48, b: 52 },
+                type: "choice",
+                choiceA: "Professional networking - Open doors and opportunities",
+                choiceB: "Skill development - Foundation for success",
+                media: null
+            },
+            {
+                id: 59,
+                title: "Should I start a meditation group?",
+                description: "I practice meditation and thinking about starting a group in my community. It would help others and create a supportive environment, but requires organization and consistent hosting.",
+                category: "Health",
+                author: "Sofia",
+                votes: { good: 90, bad: 10 },
+                type: "good-bad",
+                media: null
+            },
+            {
+                id: 60,
+                title: "DIY projects vs professional services",
+                description: "I need home repairs and debating between DIY or hiring professionals. DIY saves money and provides learning, but professional services ensure quality and save time.",
+                category: "Lifestyle",
+                author: "Eric",
+                votes: { a: 37, b: 63 },
+                type: "choice",
+                choiceA: "DIY - Save money and learn new skills",
+                choiceB: "Professional services - Quality and time savings",
                 media: null
             }
         ];
