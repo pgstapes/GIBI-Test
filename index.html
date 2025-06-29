@@ -1502,21 +1502,29 @@
         .choice-options {
             display: flex;
             gap: 15px;
-            margin: 20px 0;
+            margin: 20px 0 60px 0;
             width: 100%;
+            justify-content: center;
+            align-items: center;
         }
 
         .choice-option {
             flex: 1;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 15px;
-            padding: 20px;
+            padding: 8px 4px;
             text-align: center;
             position: relative;
             backdrop-filter: blur(10px);
             border: 2px solid transparent;
             transition: all 0.3s;
-            min-width: 120px;
+            min-width: 60px;
+            max-width: 120px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .choice-option:hover {
@@ -2680,9 +2688,268 @@
             background: #ffed4e;
             transform: translateY(-2px);
         }
+
+        /* Grouped Question Indicator */
+        .grouped-question-indicator {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            margin: 0 0 20px 0;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .group-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .group-info h4 {
+            margin: 0 0 8px 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .group-progress {
+            margin: 0 0 8px 0;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .group-incentive {
+            margin: 0;
+            font-size: 0.9rem;
+            font-weight: 500;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 12px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .exit-group-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .exit-group-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #2ed573;
+            transition: width 0.5s ease;
+            border-radius: 0 3px 3px 0;
+        }
+
+        /* Group Completion Screen */
+        .group-completion-screen {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
+            padding: 40px 20px;
+        }
+
+        .completion-content {
+            text-align: center;
+            max-width: 500px;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .completion-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .completion-content h2 {
+            color: #333;
+            margin: 0 0 15px 0;
+            font-size: 1.8rem;
+        }
+
+        .completion-content p {
+            color: #666;
+            margin: 0 0 15px 0;
+            line-height: 1.6;
+        }
+
+        .completion-incentive {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-weight: 600;
+        }
+
+        .return-to-voting-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .return-to-voting-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Choice voting buttons - smaller and less intrusive */
+        .choice-buttons {
+            display: flex;
+            gap: 6px;
+            margin-top: 10px;
+            justify-content: center;
+        }
+
+        .choice-button {
+            padding: 4px 8px;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            background: white;
+            color: #666;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .choice-button:hover {
+            border-color: #007bff;
+            color: #007bff;
+            transform: translateY(-1px);
+        }
+
+        .choice-button.choice-a {
+            border-color: #6f42c1;
+            color: #6f42c1;
+        }
+
+        .choice-button.choice-b {
+            border-color: #007bff;
+            color: #007bff;
+        }
+
+        .choice-button.choice-a:hover {
+            background: #6f42c1;
+            color: white;
+        }
+
+        .choice-button.choice-b:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        /* Swipe feedback highlights */
+        .swipe-feedback {
+            position: fixed;
+            top: 0;
+            width: 100px;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1000;
+            transition: opacity 0.3s ease;
+            opacity: 0;
+        }
+
+        .swipe-feedback.left {
+            left: 0;
+            background: linear-gradient(to right, rgba(220, 53, 69, 0.8), rgba(220, 53, 69, 0.2), transparent);
+        }
+
+        .swipe-feedback.right {
+            right: 0;
+            background: linear-gradient(to left, rgba(40, 167, 69, 0.8), rgba(40, 167, 69, 0.2), transparent);
+        }
+
+        .swipe-feedback.choice-left {
+            left: 0;
+            background: linear-gradient(to right, rgba(111, 66, 193, 0.8), rgba(111, 66, 193, 0.2), transparent);
+        }
+
+        .swipe-feedback.choice-right {
+            right: 0;
+            background: linear-gradient(to left, rgba(0, 123, 255, 0.8), rgba(0, 123, 255, 0.2), transparent);
+        }
+
+        .swipe-feedback .feedback-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 48px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .swipe-feedback.left .feedback-icon {
+            right: 20px;
+        }
+
+        .swipe-feedback.right .feedback-icon {
+            left: 20px;
+        }
+
+        .swipe-feedback.choice-left .feedback-icon {
+            right: 20px;
+        }
+
+        .swipe-feedback.choice-right .feedback-icon {
+            left: 20px;
+        }
     </style>
 </head>
 <body>
+    <!-- Swipe feedback highlights -->
+    <div class="swipe-feedback left" id="swipeFeedbackLeft">
+        <div class="feedback-icon">👎</div>
+    </div>
+    <div class="swipe-feedback right" id="swipeFeedbackRight">
+        <div class="feedback-icon">👍</div>
+    </div>
+    <div class="swipe-feedback choice-left" id="swipeFeedbackChoiceLeft">
+        <div class="feedback-icon">A</div>
+    </div>
+    <div class="swipe-feedback choice-right" id="swipeFeedbackChoiceRight">
+        <div class="feedback-icon">B</div>
+    </div>
+
+    <!-- Header -->
     <div class="header">
         <div class="logo">
             <span class="logo-text">GIBI</span>
@@ -2728,6 +2995,7 @@
 
                         <!-- Choice Question Layout -->
                         <div id="choiceLayout" style="display: none;">
+                            <div class="author" id="choiceAuthor">— Sarah</div>
                             <div class="choice-options">
                                 <div class="choice-option option-a" onclick="voteChoice('a')" ontouchend="event.preventDefault(); voteChoice('a');">
                                     <div class="choice-swipe">👈</div>
@@ -3075,7 +3343,6 @@
             showTab('voting');
             loadNextIdea();
             setupSwipeFunctionality();
-            updateStats();
             
             // Auto-trigger sports group invitation for testing
             setTimeout(() => {
@@ -3110,6 +3377,42 @@
             const card = document.getElementById('currentCard');
             if (!card) return;
 
+            // Get feedback elements
+            const feedbackLeft = document.getElementById('swipeFeedbackLeft');
+            const feedbackRight = document.getElementById('swipeFeedbackRight');
+            const feedbackChoiceLeft = document.getElementById('swipeFeedbackChoiceLeft');
+            const feedbackChoiceRight = document.getElementById('swipeFeedbackChoiceRight');
+
+            function showFeedback(direction, isChoice = false) {
+                // Hide all feedback first
+                feedbackLeft.style.opacity = '0';
+                feedbackRight.style.opacity = '0';
+                feedbackChoiceLeft.style.opacity = '0';
+                feedbackChoiceRight.style.opacity = '0';
+
+                // Show appropriate feedback
+                if (isChoice) {
+                    if (direction === 'left') {
+                        feedbackChoiceLeft.style.opacity = '1';
+                    } else if (direction === 'right') {
+                        feedbackChoiceRight.style.opacity = '1';
+                    }
+                } else {
+                    if (direction === 'left') {
+                        feedbackLeft.style.opacity = '1';
+                    } else if (direction === 'right') {
+                        feedbackRight.style.opacity = '1';
+                    }
+                }
+            }
+
+            function hideFeedback() {
+                feedbackLeft.style.opacity = '0';
+                feedbackRight.style.opacity = '0';
+                feedbackChoiceLeft.style.opacity = '0';
+                feedbackChoiceRight.style.opacity = '0';
+            }
+
             // Touch events for mobile
             card.addEventListener('touchstart', (e) => {
                 startX = e.touches[0].clientX;
@@ -3129,6 +3432,14 @@
                 if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 10) {
                     e.preventDefault();
                     card.style.transform = `translateX(${diffX}px) rotate(${diffX * 0.1}deg)`;
+                    
+                    // Show feedback based on direction and question type
+                    const idea = shuffledIdeas[currentIdeaIndex];
+                    if (diffX > 0) {
+                        showFeedback('right', idea.type === 'choice');
+                    } else {
+                        showFeedback('left', idea.type === 'choice');
+                    }
                 }
             });
 
@@ -3142,6 +3453,7 @@
                 
                 card.style.transform = '';
                 isDragging = false;
+                hideFeedback();
                 
                 // Only trigger vote if it was a horizontal swipe
                 if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 100) {
@@ -3181,6 +3493,14 @@
                 
                 if (Math.abs(diffX) > Math.abs(diffY)) {
                     card.style.transform = `translateX(${diffX}px) rotate(${diffX * 0.1}deg)`;
+                    
+                    // Show feedback based on direction and question type
+                    const idea = shuffledIdeas[currentIdeaIndex];
+                    if (diffX > 0) {
+                        showFeedback('right', idea.type === 'choice');
+                    } else {
+                        showFeedback('left', idea.type === 'choice');
+                    }
                 }
             });
 
@@ -3192,6 +3512,7 @@
                 
                 card.style.transform = '';
                 isDragging = false;
+                hideFeedback();
                 
                 if (Math.abs(diffX) > 100) {
                     const idea = shuffledIdeas[currentIdeaIndex];
@@ -3244,8 +3565,8 @@
                 author: "Jordan",
                 votes: { a: 34, b: 28 },
                 type: "choice",
-                choiceA: "Coffee - Quick energy boost",
-                choiceB: "Tea - Sustained focus",
+                choiceA: "Coffee",
+                choiceB: "Tea",
                 media: null
             },
             {
@@ -3270,8 +3591,8 @@
                 author: "Chris",
                 votes: { a: 12, b: 8 },
                 type: "choice",
-                choiceA: "Remote - Flexibility and productivity",
-                choiceB: "Office - Better collaboration",
+                choiceA: "Remote",
+                choiceB: "Office",
                 media: null
             },
             {
@@ -3287,13 +3608,13 @@
             {
                 id: 7,
                 title: "MacBook vs Windows laptop for development",
-                description: "I need a new laptop for software development. MacBooks have great build quality and Unix-based system, but Windows laptops offer better value and gaming capabilities. Which should I choose for my development work?",
+                description: "I need a new laptop for software development. MacBooks have great build quality and Unix-based system, but Windows laptops offer more variety and better value. I primarily work with web technologies and occasionally need to run Windows-specific tools.",
                 category: "Tech",
-                author: "David",
-                votes: { a: 45, b: 38 },
+                author: "Taylor",
+                votes: { a: 23, b: 18 },
                 type: "choice",
-                choiceA: "MacBook - Premium build and Unix system",
-                choiceB: "Windows - Better value and gaming",
+                choiceA: "MacBook",
+                choiceB: "Windows",
                 media: null
             },
             {
@@ -3308,14 +3629,14 @@
             },
             {
                 id: 9,
-                title: "Gym membership vs home workout equipment",
-                description: "I want to get fit but I'm torn between joining a gym or buying home workout equipment. The gym has more variety and social aspect, but home equipment is more convenient and cost-effective long-term.",
+                title: "Home gym vs gym membership",
+                description: "I want to get fit but can't decide between building a home gym or getting a gym membership. Home gym offers convenience and privacy, but gym membership provides variety and social motivation. I have space for basic equipment at home.",
                 category: "Health",
                 author: "Mike",
                 votes: { a: 52, b: 41 },
                 type: "choice",
-                choiceA: "Gym - Variety and social motivation",
-                choiceB: "Home - Convenience and cost-effective",
+                choiceA: "Gym",
+                choiceB: "Home",
                 media: null
             },
             {
@@ -3336,8 +3657,8 @@
                 author: "Tom",
                 votes: { a: 38, b: 62 },
                 type: "choice",
-                choiceA: "Buy - Investment and stability",
-                choiceB: "Rent - Flexibility and lower commitment",
+                choiceA: "Buy",
+                choiceB: "Rent",
                 media: null
             },
             {
@@ -3352,14 +3673,14 @@
             },
             {
                 id: 13,
-                title: "Traditional college vs online courses",
-                description: "I want to advance my education but I'm not sure whether to go back to traditional college or take online courses. College offers networking and structure, but online courses are more flexible and affordable.",
+                title: "College vs online courses for learning programming",
+                description: "I want to learn programming and can't decide between traditional college or online courses. College provides structure and networking, but online courses are more flexible and affordable. I'm motivated to learn but need guidance.",
                 category: "Education",
                 author: "Kevin",
                 votes: { a: 31, b: 69 },
                 type: "choice",
-                choiceA: "College - Networking and structure",
-                choiceB: "Online - Flexibility and affordability",
+                choiceA: "College",
+                choiceB: "Online",
                 media: null
             },
             {
@@ -3380,8 +3701,8 @@
                 author: "James",
                 votes: { a: 58, b: 42 },
                 type: "choice",
-                choiceA: "Freelance - Freedom and higher income",
-                choiceB: "Full-time - Stability and benefits",
+                choiceA: "Freelance",
+                choiceB: "Full-time",
                 media: null
             },
             {
@@ -3402,8 +3723,8 @@
                 author: "Maria",
                 votes: { a: 42, b: 35 },
                 type: "choice",
-                choiceA: "React - Larger ecosystem and job market",
-                choiceB: "Vue - Easier learning curve and better docs",
+                choiceA: "React",
+                choiceB: "Vue",
                 media: null
             },
             {
@@ -3424,8 +3745,8 @@
                 author: "Ryan",
                 votes: { a: 28, b: 72 },
                 type: "choice",
-                choiceA: "Meditation - Mental clarity and calm",
-                choiceB: "Exercise - Physical release and endorphins",
+                choiceA: "Meditation",
+                choiceB: "Exercise",
                 media: null
             },
             {
@@ -3446,8 +3767,8 @@
                 author: "Daniel",
                 votes: { a: 65, b: 35 },
                 type: "choice",
-                choiceA: "Solo - Freedom and authentic experience",
-                choiceB: "Group - Safety and social connections",
+                choiceA: "Solo",
+                choiceB: "Group",
                 media: null
             },
             {
@@ -3468,8 +3789,8 @@
                 author: "Michael",
                 votes: { a: 48, b: 52 },
                 type: "choice",
-                choiceA: "iPhone - Better ecosystem and security",
-                choiceB: "Android - More customization and value",
+                choiceA: "iPhone",
+                choiceB: "Android",
                 media: null
             },
             {
@@ -3480,8 +3801,8 @@
                 author: "Sarah",
                 votes: { a: 55, b: 45 },
                 type: "choice",
-                choiceA: "Startup - Equity and growth potential",
-                choiceB: "Big company - Stability and benefits",
+                choiceA: "Startup",
+                choiceB: "Big company",
                 media: null
             },
             {
@@ -3502,8 +3823,8 @@
                 author: "Emily",
                 votes: { a: 62, b: 38 },
                 type: "choice",
-                choiceA: "Meal prep - Time saving and consistency",
-                choiceB: "Daily cooking - Fresh meals and enjoyment",
+                choiceA: "Meal prep",
+                choiceB: "Daily cooking",
                 media: null
             },
             {
@@ -3524,8 +3845,8 @@
                 author: "Lisa",
                 votes: { a: 41, b: 59 },
                 type: "choice",
-                choiceA: "Electric - Zero emissions and lower fuel costs",
-                choiceB: "Hybrid - Flexibility and better infrastructure",
+                choiceA: "Electric",
+                choiceB: "Hybrid",
                 media: null
             },
             {
@@ -3546,8 +3867,8 @@
                 author: "Mark",
                 votes: { a: 33, b: 67 },
                 type: "choice",
-                choiceA: "Minimalism - Less clutter and stress",
-                choiceB: "Collecting - Joy and personal expression",
+                choiceA: "Minimalism",
+                choiceB: "Collecting",
                 media: null
             },
             {
@@ -3568,8 +3889,8 @@
                 author: "Chris",
                 votes: { a: 69, b: 31 },
                 type: "choice",
-                choiceA: "Course - Structure and professional feedback",
-                choiceB: "Self-study - Cost-effective and flexible",
+                choiceA: "Course",
+                choiceB: "Self-study",
                 media: null
             },
             {
@@ -3590,8 +3911,8 @@
                 author: "Jake",
                 votes: { a: 54, b: 46 },
                 type: "choice",
-                choiceA: "Gaming PC - Better graphics and versatility",
-                choiceB: "Console - Simplicity and social gaming",
+                choiceA: "Gaming PC",
+                choiceB: "Console",
                 media: null
             },
             {
@@ -3612,8 +3933,8 @@
                 author: "Tom",
                 votes: { a: 58, b: 42 },
                 type: "choice",
-                choiceA: "Morning person - Productivity and quiet time",
-                choiceB: "Night owl - Creativity and natural rhythm",
+                choiceA: "Morning person",
+                choiceB: "Night owl",
                 media: null
             },
             {
@@ -3634,8 +3955,8 @@
                 author: "Mike",
                 votes: { a: 71, b: 29 },
                 type: "choice",
-                choiceA: "Local business - Support community and quality",
-                choiceB: "Online shopping - Convenience and savings",
+                choiceA: "Local business",
+                choiceB: "Online shopping",
                 media: null
             },
             {
@@ -3656,8 +3977,8 @@
                 author: "Sam",
                 votes: { a: 47, b: 53 },
                 type: "choice",
-                choiceA: "Digital nomad - Travel and adventure",
-                choiceB: "Stable location - Relationships and routine",
+                choiceA: "Digital nomad",
+                choiceB: "Stable location",
                 media: null
             },
             {
@@ -3678,8 +3999,8 @@
                 author: "Carl",
                 votes: { a: 36, b: 64 },
                 type: "choice",
-                choiceA: "Solo project - Full control and vision",
-                choiceB: "Team collaboration - Diverse skills and support",
+                choiceA: "Solo project",
+                choiceB: "Team collaboration",
                 media: null
             },
             {
@@ -3700,8 +4021,8 @@
                 author: "Ben",
                 votes: { a: 44, b: 56 },
                 type: "choice",
-                choiceA: "Traditional - Credibility and professional support",
-                choiceB: "Self-publishing - Creative control and higher royalties",
+                choiceA: "Traditional",
+                choiceB: "Self-publishing",
                 media: null
             },
             {
@@ -3722,8 +4043,8 @@
                 author: "Robert",
                 votes: { a: 51, b: 49 },
                 type: "choice",
-                choiceA: "Stocks - Liquidity and diversification",
-                choiceB: "Real estate - Passive income and tax benefits",
+                choiceA: "Stocks",
+                choiceB: "Real estate",
                 media: null
             },
             {
@@ -3744,8 +4065,8 @@
                 author: "Paul",
                 votes: { a: 67, b: 33 },
                 type: "choice",
-                choiceA: "Open source - Help community and learn from others",
-                choiceB: "Personal projects - Full creative control and portfolio",
+                choiceA: "Open source",
+                choiceB: "Personal projects",
                 media: null
             },
             {
@@ -3766,8 +4087,8 @@
                 author: "Steve",
                 votes: { a: 39, b: 61 },
                 type: "choice",
-                choiceA: "Certification - Credentials and structured learning",
-                choiceB: "Practical experience - Real skills and problem-solving",
+                choiceA: "Certification",
+                choiceB: "Practical experience",
                 media: null
             },
             {
@@ -3788,8 +4109,8 @@
                 author: "Nick",
                 votes: { a: 43, b: 57 },
                 type: "choice",
-                choiceA: "Local gym - Equipment and social motivation",
-                choiceB: "Home setup - Convenience and privacy",
+                choiceA: "Local gym",
+                choiceB: "Home setup",
                 media: null
             },
             {
@@ -3810,8 +4131,8 @@
                 author: "Marcus",
                 votes: { a: 55, b: 45 },
                 type: "choice",
-                choiceA: "Freelance writing - Steady income and client work",
-                choiceB: "Content creation - Creative freedom and growth potential",
+                choiceA: "Freelance writing",
+                choiceB: "Content creation",
                 media: null
             },
             {
@@ -3832,8 +4153,8 @@
                 author: "Connor",
                 votes: { a: 41, b: 59 },
                 type: "choice",
-                choiceA: "Traditional dating - Organic connections and authenticity",
-                choiceB: "Online dating - More options and efficiency",
+                choiceA: "Traditional dating",
+                choiceB: "Online dating",
                 media: null
             },
             {
@@ -3854,8 +4175,8 @@
                 author: "Aaron",
                 votes: { a: 48, b: 52 },
                 type: "choice",
-                choiceA: "Professional networking - Open doors and opportunities",
-                choiceB: "Skill development - Foundation for success",
+                choiceA: "Professional networking",
+                choiceB: "Skill development",
                 media: null
             },
             {
@@ -3876,8 +4197,44 @@
                 author: "Eric",
                 votes: { a: 37, b: 63 },
                 type: "choice",
-                choiceA: "DIY - Save money and learn new skills",
-                choiceB: "Professional services - Quality and time savings",
+                choiceA: "DIY",
+                choiceB: "Professional services",
+                media: null
+            },
+            {
+                id: 61,
+                title: "Self-taught vs College for programming",
+                description: "I want to become a software developer. Self-taught learning is faster and cheaper, but college provides structure and networking opportunities. I'm motivated and can learn independently, but I'm concerned about missing fundamentals.",
+                category: "Education",
+                author: "Riley",
+                votes: { a: 28, b: 35 },
+                type: "choice",
+                choiceA: "Self-taught",
+                choiceB: "College",
+                media: null
+            },
+            {
+                id: 62,
+                title: "Freelance vs Full-time job",
+                description: "I'm a graphic designer with 3 years of experience. Freelancing offers freedom and potentially higher income, but full-time provides stability and benefits. I have a good client base but worry about inconsistent income.",
+                category: "Professional",
+                author: "Quinn",
+                votes: { a: 19, b: 42 },
+                type: "choice",
+                choiceA: "Freelance",
+                choiceB: "Full-time",
+                media: null
+            },
+            {
+                id: 63,
+                title: "React vs Vue for new project",
+                description: "I'm starting a new web application and need to choose a framework. React has a larger ecosystem and job market, but Vue is easier to learn and has better documentation. The project is medium-sized with a small team.",
+                category: "Tech",
+                author: "Avery",
+                votes: { a: 56, b: 23 },
+                type: "choice",
+                choiceA: "React",
+                choiceB: "Vue",
                 media: null
             }
         ];
@@ -3974,6 +4331,12 @@
         }
 
         function updateCard(idea) {
+            // Safety check - ensure idea exists and has required properties
+            if (!idea || !idea.category || !idea.title || !idea.author) {
+                console.error('Invalid idea object:', idea);
+                return;
+            }
+            
             document.getElementById('ideaCategory').textContent = idea.category;
             document.getElementById('ideaTitle').textContent = idea.title;
             document.getElementById('ideaAuthor').textContent = `— ${idea.author}`;
@@ -4048,6 +4411,7 @@
                 document.getElementById('choiceB').textContent = idea.choiceB;
                 document.getElementById('votesA').textContent = `${idea.votes.a || 0} votes`;
                 document.getElementById('votesB').textContent = `${idea.votes.b || 0} votes`;
+                document.getElementById('choiceAuthor').textContent = `— ${idea.author}`;
             } else {
                 goodBadLayout.style.display = 'block';
                 choiceLayout.style.display = 'none';
@@ -4085,7 +4449,30 @@
             // Move to next idea after overlay
             setTimeout(() => {
                 currentIdeaIndex++;
-                loadNextIdea();
+                
+                // Debug logging
+                console.log('Vote function - currentIdeaIndex:', currentIdeaIndex);
+                console.log('shuffledIdeas length:', shuffledIdeas.length);
+                console.log('First idea isGrouped:', shuffledIdeas[0]?.isGrouped);
+                
+                // Check if we're in a grouped question session and if it's complete
+                const currentGroup = questionGroups.find(g => g.name === "NBA Rule Changes 2024");
+                console.log('Current group:', currentGroup);
+                console.log('Array comparison:', shuffledIdeas === sportsGroupedQuestions);
+                
+                // Simple fix: check if we're past the last question and using grouped questions
+                const isGroupedSession = shuffledIdeas.length > 0 && shuffledIdeas[0].isGrouped;
+                if (currentGroup && isGroupedSession && currentIdeaIndex >= currentGroup.questionCount) {
+                    console.log('SHOWING COMPLETION SCREEN');
+                    // Group is complete, show completion screen
+                    showGroupCompletion(currentGroup);
+                    return; // Don't continue to loadNextIdea
+                } else {
+                    console.log('Continuing to next question');
+                    // Continue to next question
+                    loadNextIdea();
+                    updateGroupProgress();
+                }
             }, 800);
 
             // Show engagement prompt every 5 votes
@@ -4109,9 +4496,33 @@
             showVoteOverlay(overlayClass, `✅ ${choiceText}`);
             
             // Move to next idea after overlay
+            // TODO: Add completion check here like in vote() function
             setTimeout(() => {
                 currentIdeaIndex++;
-                loadNextIdea();
+                
+                // Debug logging
+                console.log('Vote function - currentIdeaIndex:', currentIdeaIndex);
+                console.log('shuffledIdeas length:', shuffledIdeas.length);
+                console.log('First idea isGrouped:', shuffledIdeas[0]?.isGrouped);
+                
+                // Check if we're in a grouped question session and if it's complete
+                const currentGroup = questionGroups.find(g => g.name === "NBA Rule Changes 2024");
+                console.log('Current group:', currentGroup);
+                console.log('Array comparison:', shuffledIdeas === sportsGroupedQuestions);
+                
+                // Simple fix: check if we're past the last question and using grouped questions
+                const isGroupedSession = shuffledIdeas.length > 0 && shuffledIdeas[0].isGrouped;
+                if (currentGroup && isGroupedSession && currentIdeaIndex >= currentGroup.questionCount) {
+                    console.log('SHOWING COMPLETION SCREEN');
+                    // Group is complete, show completion screen
+                    showGroupCompletion(currentGroup);
+                    return; // Don't continue to loadNextIdea
+                } else {
+                    console.log('Continuing to next question');
+                    // Continue to next question
+                    loadNextIdea();
+                    updateGroupProgress();
+                }
             }, 800);
         }
 
@@ -4232,10 +4643,8 @@
         document.querySelector('.tier-option.free').classList.add('selected');
 
         // Initialize the app
-        updateCard();
-        updateStats();
-
-        // New Features: Submission, Quality Control, and Profile
+        // updateCard(); // This was causing the error - removed
+        // updateStats(); // This function doesn't exist - removed
 
         let selectedTier = 'free';
         let userProfile = {
@@ -4274,8 +4683,8 @@
                 author: "Parent",
                 votes: { a: 62, b: 38 },
                 type: "choice",
-                choiceA: "Soccer - Teamwork and endurance",
-                choiceB: "Basketball - Coordination and quick thinking",
+                choiceA: "Soccer",
+                choiceB: "Basketball",
                 media: null,
                 isGrouped: true,
                 groupName: "NBA Rule Changes 2024",
@@ -4302,8 +4711,8 @@
                 author: "Coach",
                 votes: { a: 35, b: 65 },
                 type: "choice",
-                choiceA: "Traditional - Experience and intuition",
-                choiceB: "Technology - Data and analytics",
+                choiceA: "Traditional",
+                choiceB: "Technology",
                 media: null,
                 isGrouped: true,
                 groupName: "NBA Rule Changes 2024",
@@ -4326,6 +4735,8 @@
 
         // Auto-trigger sports group invitation for testing
         function triggerSportsGroupInvitation() {
+            console.log('Triggering sports group invitation...');
+            
             const sportsGroup = {
                 id: Date.now(),
                 name: "NBA Rule Changes 2024",
@@ -4339,11 +4750,15 @@
                 totalInvited: 1
             };
 
+            console.log('Sports group created:', sportsGroup);
+
             // Add to groups
             questionGroups.push(sportsGroup);
+            console.log('Question groups:', questionGroups);
 
             // Show invitation after a short delay
             setTimeout(() => {
+                console.log('Showing group invitation notification...');
                 showGroupInvitationNotification("test@example.com", sportsGroup);
             }, 2000); // Show after 2 seconds
         }
@@ -4486,6 +4901,8 @@
         }
 
         function showGroupInvitationNotification(email, group) {
+            console.log('showGroupInvitationNotification called with:', { email, group });
+            
             const notification = document.createElement('div');
             notification.className = 'group-invitation-notification';
             notification.innerHTML = `
@@ -4499,7 +4916,9 @@
                 </div>
             `;
             
+            console.log('Notification element created:', notification);
             document.body.appendChild(notification);
+            console.log('Notification added to body');
             
             // Auto-remove after 30 seconds
             setTimeout(() => {
@@ -4555,18 +4974,34 @@
         }
 
         function showGroupedQuestionIndicator(group) {
+            // Remove any existing indicator first
+            const existingIndicator = document.querySelector('.grouped-question-indicator');
+            if (existingIndicator) {
+                existingIndicator.remove();
+            }
+            
             const indicator = document.createElement('div');
             indicator.className = 'grouped-question-indicator';
             indicator.innerHTML = `
-                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; border-radius: 10px; margin: 10px 0; text-align: center;">
-                    <h4>🎯 Group: ${group.name}</h4>
-                    <p>You're answering ${group.questionCount} focused questions</p>
-                    ${group.incentiveMessage ? `<p><strong>🎁 ${group.incentiveMessage}</strong></p>` : ''}
+                <div class="group-header">
+                    <div class="group-info">
+                        <h4>🎯 ${group.name}</h4>
+                        <p class="group-progress">Question ${currentIdeaIndex + 1} of ${group.questionCount}</p>
+                        ${group.incentiveMessage ? `<p class="group-incentive">🎁 ${group.incentiveMessage}</p>` : ''}
+                    </div>
+                    <button class="exit-group-btn" onclick="exitGroupedQuestions()" title="Exit Group">
+                        ✕
+                    </button>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: ${((currentIdeaIndex + 1) / group.questionCount) * 100}%"></div>
                 </div>
             `;
             
+            // Insert above the card container instead of inside it
             const cardContainer = document.getElementById('cardContainer');
-            cardContainer.insertBefore(indicator, cardContainer.firstChild);
+            const votingTab = document.getElementById('voting-tab');
+            votingTab.insertBefore(indicator, cardContainer);
         }
 
         function showUpgradeModal() {
@@ -4770,6 +5205,136 @@
                     </div>
                 `).join('');
             }
+        }
+
+        function exitGroupedQuestions() {
+            // Reset to regular questions
+            shuffledIdeas = shuffleArray(ideas);
+            currentIdeaIndex = 0;
+            
+            // Remove grouped question indicator
+            const indicator = document.querySelector('.grouped-question-indicator');
+            if (indicator) {
+                indicator.remove();
+            }
+            
+            // Load next regular idea
+            loadNextIdea();
+            
+            showNotification('Returned to regular voting questions');
+        }
+
+        function updateGroupProgress() {
+            const indicator = document.querySelector('.grouped-question-indicator');
+            if (indicator) {
+                const progressText = indicator.querySelector('.group-progress');
+                const progressFill = indicator.querySelector('.progress-fill');
+                if (progressText && progressFill) {
+                    const currentGroup = questionGroups.find(g => g.name === "NBA Rule Changes 2024");
+                    if (currentGroup) {
+                        progressText.textContent = `Question ${currentIdeaIndex + 1} of ${currentGroup.questionCount}`;
+                        progressFill.style.width = `${((currentIdeaIndex + 1) / currentGroup.questionCount) * 100}%`;
+                    }
+                }
+            }
+        }
+
+        function showGroupCompletion(group) {
+            // Remove grouped question indicator
+            const indicator = document.querySelector('.grouped-question-indicator');
+            if (indicator) {
+                indicator.remove();
+            }
+            
+            // Create completion screen
+            const completionScreen = document.createElement('div');
+            completionScreen.className = 'group-completion-screen';
+            completionScreen.innerHTML = `
+                <div class="completion-content">
+                    <div class="completion-icon">🎉</div>
+                    <h2>Thank you for completing the grouped questions!</h2>
+                    <p>You've successfully answered all ${group.questionCount} questions about <strong>${group.name}</strong>.</p>
+                    ${group.incentiveMessage ? `<p class="completion-incentive">🎁 ${group.incentiveMessage}</p>` : ''}
+                    <p>Your feedback will help shape the future of this topic.</p>
+                    <button class="return-to-voting-btn" onclick="returnToRegularVoting()">Continue Voting</button>
+                </div>
+            `;
+            
+            const cardContainer = document.getElementById('cardContainer');
+            cardContainer.innerHTML = '';
+            cardContainer.appendChild(completionScreen);
+        }
+
+        function returnToRegularVoting() {
+            // Reset to regular questions
+            shuffledIdeas = shuffleArray(ideas);
+            currentIdeaIndex = 0;
+            
+            // Remove completion screen and restore card container
+            const completionScreen = document.querySelector('.group-completion-screen');
+            if (completionScreen) {
+                completionScreen.remove();
+            }
+            
+            // Restore the original card container HTML
+            const cardContainer = document.getElementById('cardContainer');
+            cardContainer.innerHTML = `
+                <div class="card" id="currentCard">
+                    <div class="card-content">
+                        <div>
+                            <div class="category" id="ideaCategory">Food</div>
+                            <h2 class="card-title" id="ideaTitle">Pizza for dinner tonight?</h2>
+                            <p class="description" id="ideaDescription">Should we order pizza for dinner? I'm craving some pepperoni!</p>
+                            <div class="media-container" id="mediaContainer" style="display: none;">
+                                <!-- Media content will be inserted here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Good/Bad Question Layout -->
+                        <div id="goodBadLayout">
+                            <div class="author" id="ideaAuthor">— Sarah</div>
+                            <div class="votes">
+                                <div class="vote-count">
+                                    👍 <span id="goodVotes">45</span>
+                                </div>
+                                <div class="vote-count">
+                                    👎 <span id="badVotes">12</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Choice Question Layout -->
+                        <div id="choiceLayout" style="display: none;">
+                            <div class="author" id="choiceAuthor">— Sarah</div>
+                            <div class="choice-options">
+                                <div class="choice-option option-a" onclick="voteChoice('a')" ontouchend="event.preventDefault(); voteChoice('a');">
+                                    <div class="choice-swipe">👈</div>
+                                    <div class="choice-text" id="choiceA">Option A</div>
+                                    <div class="choice-votes" id="votesA">0 votes</div>
+                                </div>
+                                <div class="choice-option option-b" onclick="voteChoice('b')" ontouchend="event.preventDefault(); voteChoice('b');">
+                                    <div class="choice-swipe">👉</div>
+                                    <div class="choice-text" id="choiceB">Option B</div>
+                                    <div class="choice-votes" id="votesB">0 votes</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swipe-overlay" id="swipeOverlay"></div>
+                    <button class="follow-button" id="followButton" onclick="followIdea()">Follow for Updates</button>
+                    <div class="question-type-indicator" id="questionTypeIndicator">Good/Bad</div>
+                </div>
+            `;
+            
+            // Load next regular idea
+            loadNextIdea();
+            
+            // Re-setup swipe functionality for the restored card
+            setTimeout(() => {
+                setupSwipeFunctionality();
+            }, 300);
+            
+            showNotification('Welcome back to regular voting!');
         }
     </script>
 </body>
