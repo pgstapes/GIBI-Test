@@ -2487,6 +2487,199 @@
             /* No extra styles needed, but this class is for clarity and future tweaks */
         }
         /* .submit-button styles below only affect the form button, not the header */
+
+        /* Grouped Questions Feature */
+        .grouped-questions-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 25px 0;
+            color: white;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .grouped-questions-section h3 {
+            color: white;
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
+
+        .grouped-questions-section p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 20px;
+        }
+
+        .group-creation {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .group-creation .form-group {
+            margin-bottom: 20px;
+        }
+
+        .group-creation label {
+            color: white;
+            font-weight: 600;
+        }
+
+        .group-creation input,
+        .group-creation textarea,
+        .group-creation select {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #333;
+        }
+
+        .group-creation input:focus,
+        .group-creation textarea:focus,
+        .group-creation select:focus {
+            border-color: rgba(255, 255, 255, 0.8);
+            background: white;
+        }
+
+        .create-group-button {
+            background: #2ed573;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(46, 213, 115, 0.3);
+        }
+
+        .create-group-button:hover {
+            background: #26d0aa;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(46, 213, 115, 0.4);
+        }
+
+        .create-group-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Group Invitation Notification */
+        .group-invitation-notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            max-width: 350px;
+            animation: slideInRight 0.5s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .group-invitation-notification h4 {
+            margin: 0 0 10px 0;
+            font-size: 1.2rem;
+        }
+
+        .group-invitation-notification p {
+            margin: 0 0 15px 0;
+            opacity: 0.9;
+        }
+
+        .group-invitation-notification .incentive {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+
+        .group-invitation-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .group-invitation-buttons button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .accept-group-btn {
+            background: #2ed573;
+            color: white;
+        }
+
+        .accept-group-btn:hover {
+            background: #26d0aa;
+        }
+
+        .decline-group-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .decline-group-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Premium Feature Lock */
+        .premium-lock {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+        }
+
+        .premium-lock h4 {
+            color: white;
+            margin: 0 0 10px 0;
+        }
+
+        .premium-lock p {
+            color: rgba(255, 255, 255, 0.8);
+            margin: 0 0 15px 0;
+        }
+
+        .upgrade-button {
+            background: #ffd700;
+            color: #333;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .upgrade-button:hover {
+            background: #ffed4e;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -2681,6 +2874,7 @@
                                 <li>Priority voting</li>
                                 <li>Advanced analytics</li>
                                 <li>Priority support</li>
+                                <li><strong>Grouped Questions (3 groups)</strong></li>
                             </ul>
                         </div>
                         
@@ -2695,6 +2889,7 @@
                                 <li>Advanced analytics</li>
                                 <li>Priority support</li>
                                 <li>Custom branding</li>
+                                <li><strong>Grouped Questions (10 groups)</strong></li>
                             </ul>
                         </div>
                         
@@ -2710,8 +2905,52 @@
                                 <li>Dedicated support</li>
                                 <li>Custom integrations</li>
                                 <li>White-label options</li>
+                                <li><strong>Unlimited Grouped Questions</strong></li>
                             </ul>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Grouped Questions Feature (Premium) -->
+                <div class="grouped-questions-section" id="groupedQuestionsSection" style="display: none;">
+                    <h3>🎯 Create Grouped Questions</h3>
+                    <p>Send targeted question groups to specific people for focused feedback</p>
+                    
+                    <div class="group-creation">
+                        <div class="form-group">
+                            <label for="groupName">Group Name *</label>
+                            <input type="text" id="groupName" placeholder="e.g., 'Product Launch Feedback', 'Team Decision Making'">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="groupDescription">Group Description</label>
+                            <textarea id="groupDescription" placeholder="Explain what this group of questions is about and why you're targeting specific people"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="targetEmails">Target Recipients (Email addresses, one per line)</label>
+                            <textarea id="targetEmails" placeholder="john@company.com&#10;jane@company.com&#10;mike@company.com"></textarea>
+                            <div class="char-count">
+                                <span id="emailCount">0</span> recipients
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="incentiveMessage">Incentive Message</label>
+                            <textarea id="incentiveMessage" placeholder="What's in it for them? e.g., 'Get early access to our new feature' or 'Receive a $50 gift card'"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="questionCount">Number of Questions in Group</label>
+                            <select id="questionCount">
+                                <option value="5">5 questions</option>
+                                <option value="10" selected>10 questions</option>
+                                <option value="15">15 questions</option>
+                                <option value="20">20 questions</option>
+                            </select>
+                        </div>
+                        
+                        <button class="create-group-button" onclick="createQuestionGroup()">Create Group & Send Invitations</button>
                     </div>
                 </div>
                 
@@ -2833,9 +3072,12 @@
     <script>
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
-            showTab('voting');
+            showPage('vote');
             loadNextIdea();
-            setupSwipeFunctionality();
+            updateStats();
+            
+            // Auto-trigger sports group invitation for testing
+            triggerSportsGroupInvitation();
         });
 
         // Core app data
@@ -3739,28 +3981,28 @@
             const description = document.getElementById('ideaDescription');
             description.textContent = idea.description;
             
+            // Always remove any existing read more button first
+            const existingReadMoreBtn = description.nextElementSibling;
+            if (existingReadMoreBtn && existingReadMoreBtn.classList.contains('read-more')) {
+                existingReadMoreBtn.remove();
+            }
+            
             // Check if description needs truncation
             if (idea.description.length > 150) {
                 description.classList.add('truncated');
-                // Add read more button if it doesn't exist
-                if (!description.nextElementSibling || !description.nextElementSibling.classList.contains('read-more')) {
-                    const readMoreBtn = document.createElement('div');
-                    readMoreBtn.className = 'read-more';
-                    readMoreBtn.textContent = 'Read more';
-                    readMoreBtn.style.cssText = 'cursor: pointer; padding: 5px; margin-top: 5px; color: #667eea; font-weight: bold; font-size: 0.9rem;';
-                    readMoreBtn.addEventListener('click', () => toggleReadMore(readMoreBtn));
-                    readMoreBtn.addEventListener('touchend', (e) => {
-                        e.preventDefault();
-                        toggleReadMore(readMoreBtn);
-                    });
-                    description.parentNode.insertBefore(readMoreBtn, description.nextSibling);
-                }
+                // Add read more button
+                const readMoreBtn = document.createElement('div');
+                readMoreBtn.className = 'read-more';
+                readMoreBtn.textContent = 'Read more';
+                readMoreBtn.style.cssText = 'cursor: pointer; padding: 5px; margin-top: 5px; color: #667eea; font-weight: bold; font-size: 0.9rem;';
+                readMoreBtn.addEventListener('click', () => toggleReadMore(readMoreBtn));
+                readMoreBtn.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    toggleReadMore(readMoreBtn);
+                });
+                description.parentNode.insertBefore(readMoreBtn, description.nextSibling);
             } else {
                 description.classList.remove('truncated');
-                const readMoreBtn = description.nextElementSibling;
-                if (readMoreBtn && readMoreBtn.classList.contains('read-more')) {
-                    readMoreBtn.remove();
-                }
             }
 
             // Handle media
@@ -3994,27 +4236,348 @@
 
         let selectedTier = 'free';
         let userProfile = {
-            name: 'Peter',
-            reputation: 4.2,
-            ideasVoted: 156,
-            ideasSubmitted: 23,
-            accuracyRate: 89,
-            badges: ['verified', 'expert']
+            name: 'User',
+            reputation: 85,
+            ideasSubmitted: 12,
+            votesCast: 156,
+            badges: ['verified', 'expert'],
+            groups: []
         };
+
+        // Grouped Questions Feature
+        let questionGroups = [];
+        let pendingInvitations = [];
+
+        // Pre-made sports-themed grouped question set for testing
+        const sportsGroupedQuestions = [
+            {
+                id: 1,
+                title: "Should the NBA implement a 4-point shot?",
+                description: "The NBA is considering adding a 4-point shot from beyond 30 feet to increase scoring and excitement. This would reward players with exceptional range and potentially change game strategies significantly.",
+                category: "Sports",
+                author: "NBA Commissioner",
+                votes: { good: 45, bad: 55 },
+                type: "good-bad",
+                media: null,
+                isGrouped: true,
+                groupName: "NBA Rule Changes 2024",
+                groupIncentive: "Get early access to NBA rule change announcements"
+            },
+            {
+                id: 2,
+                title: "Soccer vs Basketball for youth development",
+                description: "I'm choosing a sport for my 8-year-old child. Soccer offers teamwork and endurance, while basketball develops coordination and quick thinking. Both are great for fitness and social skills.",
+                category: "Sports",
+                author: "Parent",
+                votes: { a: 62, b: 38 },
+                type: "choice",
+                choiceA: "Soccer - Teamwork and endurance",
+                choiceB: "Basketball - Coordination and quick thinking",
+                media: null,
+                isGrouped: true,
+                groupName: "NBA Rule Changes 2024",
+                groupIncentive: "Get early access to NBA rule change announcements"
+            },
+            {
+                id: 3,
+                title: "Should college athletes be paid?",
+                description: "College sports generate billions in revenue, but athletes receive no direct compensation beyond scholarships. Should we implement a payment system for college athletes?",
+                category: "Sports",
+                author: "Sports Analyst",
+                votes: { good: 78, bad: 22 },
+                type: "good-bad",
+                media: null,
+                isGrouped: true,
+                groupName: "NBA Rule Changes 2024",
+                groupIncentive: "Get early access to NBA rule change announcements"
+            },
+            {
+                id: 4,
+                title: "Traditional training vs technology-based coaching",
+                description: "Modern sports training uses AI, wearables, and data analytics, while traditional methods rely on experience and intuition. Which approach produces better athletes?",
+                category: "Sports",
+                author: "Coach",
+                votes: { a: 35, b: 65 },
+                type: "choice",
+                choiceA: "Traditional - Experience and intuition",
+                choiceB: "Technology - Data and analytics",
+                media: null,
+                isGrouped: true,
+                groupName: "NBA Rule Changes 2024",
+                groupIncentive: "Get early access to NBA rule change announcements"
+            },
+            {
+                id: 5,
+                title: "Should esports be considered real sports?",
+                description: "Esports require strategy, teamwork, and reflexes similar to traditional sports. Should competitive gaming be recognized as legitimate sports with the same respect and opportunities?",
+                category: "Sports",
+                author: "Gaming Enthusiast",
+                votes: { good: 65, bad: 35 },
+                type: "good-bad",
+                media: null,
+                isGrouped: true,
+                groupName: "NBA Rule Changes 2024",
+                groupIncentive: "Get early access to NBA rule change announcements"
+            }
+        ];
+
+        // Auto-trigger sports group invitation for testing
+        function triggerSportsGroupInvitation() {
+            const sportsGroup = {
+                id: Date.now(),
+                name: "NBA Rule Changes 2024",
+                description: "Help shape the future of basketball by providing feedback on proposed rule changes",
+                targetEmails: ["test@example.com"],
+                incentiveMessage: "Get early access to NBA rule change announcements and exclusive behind-the-scenes content",
+                questionCount: 5,
+                status: 'active',
+                createdAt: new Date(),
+                responses: 0,
+                totalInvited: 1
+            };
+
+            // Add to groups
+            questionGroups.push(sportsGroup);
+
+            // Show invitation after a short delay
+            setTimeout(() => {
+                showGroupInvitationNotification("test@example.com", sportsGroup);
+            }, 2000); // Show after 2 seconds
+        }
 
         function selectTier(tier) {
             selectedTier = tier;
+            
+            // Update tier selection UI
             document.querySelectorAll('.tier-option').forEach(option => {
                 option.classList.remove('selected');
             });
-            event.target.closest('.tier-option').classList.add('selected');
+            document.querySelector(`.tier-option.${tier}`).classList.add('selected');
+            
+            // Show/hide grouped questions section based on tier
+            const groupedSection = document.getElementById('groupedQuestionsSection');
+            if (tier === 'free') {
+                groupedSection.innerHTML = `
+                    <div class="premium-lock">
+                        <h4>🔒 Premium Feature</h4>
+                        <p>Grouped Questions is available for Premium, Pro, and Enterprise tiers.</p>
+                        <button class="upgrade-button" onclick="showUpgradeModal()">Upgrade Now</button>
+                    </div>
+                `;
+            } else {
+                groupedSection.innerHTML = `
+                    <h3>🎯 Create Grouped Questions</h3>
+                    <p>Send targeted question groups to specific people for focused feedback</p>
+                    
+                    <div class="group-creation">
+                        <div class="form-group">
+                            <label for="groupName">Group Name *</label>
+                            <input type="text" id="groupName" placeholder="e.g., 'Product Launch Feedback', 'Team Decision Making'">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="groupDescription">Group Description</label>
+                            <textarea id="groupDescription" placeholder="Explain what this group of questions is about and why you're targeting specific people"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="targetEmails">Target Recipients (Email addresses, one per line)</label>
+                            <textarea id="targetEmails" placeholder="john@company.com&#10;jane@company.com&#10;mike@company.com" oninput="updateEmailCount()"></textarea>
+                            <div class="char-count">
+                                <span id="emailCount">0</span> recipients
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="incentiveMessage">Incentive Message</label>
+                            <textarea id="incentiveMessage" placeholder="What's in it for them? e.g., 'Get early access to our new feature' or 'Receive a $50 gift card'"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="questionCount">Number of Questions in Group</label>
+                            <select id="questionCount">
+                                <option value="5">5 questions</option>
+                                <option value="10" selected>10 questions</option>
+                                <option value="15">15 questions</option>
+                                <option value="20">20 questions</option>
+                            </select>
+                        </div>
+                        
+                        <button class="create-group-button" onclick="createQuestionGroup()">Create Group & Send Invitations</button>
+                    </div>
+                `;
+            }
+            groupedSection.style.display = 'block';
             
             // Update character limits based on tier
+            updateCharacterLimits();
+        }
+
+        function updateEmailCount() {
+            const emails = document.getElementById('targetEmails').value;
+            const emailCount = emails.split('\n').filter(email => email.trim() !== '').length;
+            document.getElementById('emailCount').textContent = emailCount;
+        }
+
+        function createQuestionGroup() {
+            const groupName = document.getElementById('groupName').value.trim();
+            const groupDescription = document.getElementById('groupDescription').value.trim();
+            const targetEmails = document.getElementById('targetEmails').value.trim();
+            const incentiveMessage = document.getElementById('incentiveMessage').value.trim();
+            const questionCount = parseInt(document.getElementById('questionCount').value);
+
+            if (!groupName || !targetEmails) {
+                showNotification('Please fill in the group name and target emails');
+                return;
+            }
+
+            const emails = targetEmails.split('\n').filter(email => email.trim() !== '');
+            if (emails.length === 0) {
+                showNotification('Please enter at least one email address');
+                return;
+            }
+
+            // Check tier limits
+            const maxGroups = selectedTier === 'premium' ? 3 : selectedTier === 'pro' ? 10 : Infinity;
+            if (questionGroups.length >= maxGroups) {
+                showNotification(`You've reached the limit of ${maxGroups} groups for your ${selectedTier} tier`);
+                return;
+            }
+
+            // Create the group
+            const group = {
+                id: Date.now(),
+                name: groupName,
+                description: groupDescription,
+                targetEmails: emails,
+                incentiveMessage: incentiveMessage,
+                questionCount: questionCount,
+                status: 'active',
+                createdAt: new Date(),
+                responses: 0,
+                totalInvited: emails.length
+            };
+
+            questionGroups.push(group);
+
+            // Send invitations (simulate)
+            emails.forEach(email => {
+                sendGroupInvitation(email, group);
+            });
+
+            showNotification(`Group "${groupName}" created! Invitations sent to ${emails.length} recipients.`);
+            
+            // Reset form
+            document.getElementById('groupName').value = '';
+            document.getElementById('groupDescription').value = '';
+            document.getElementById('targetEmails').value = '';
+            document.getElementById('incentiveMessage').value = '';
+            document.getElementById('emailCount').textContent = '0';
+        }
+
+        function sendGroupInvitation(email, group) {
+            // Simulate sending invitation
+            setTimeout(() => {
+                showGroupInvitationNotification(email, group);
+            }, Math.random() * 3000 + 1000); // Random delay between 1-4 seconds
+        }
+
+        function showGroupInvitationNotification(email, group) {
+            const notification = document.createElement('div');
+            notification.className = 'group-invitation-notification';
+            notification.innerHTML = `
+                <h4>🎯 You've Been Selected!</h4>
+                <p>You've been specially invited to answer a group of questions about: <strong>${group.name}</strong></p>
+                ${group.incentiveMessage ? `<div class="incentive">🎁 ${group.incentiveMessage}</div>` : ''}
+                <p>This group contains ${group.questionCount} focused questions to help with decision making.</p>
+                <div class="group-invitation-buttons">
+                    <button class="accept-group-btn" onclick="acceptGroupInvitation('${group.id}', this)">Accept & Start</button>
+                    <button class="decline-group-btn" onclick="declineGroupInvitation(this)">Maybe Later</button>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Auto-remove after 30 seconds
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.remove();
+                }
+            }, 30000);
+        }
+
+        function acceptGroupInvitation(groupId, button) {
+            const group = questionGroups.find(g => g.id == groupId);
+            if (group) {
+                group.responses++;
+                showNotification(`Great! Starting your ${group.questionCount}-question group about "${group.name}"`);
+                
+                // Switch to voting tab and load grouped questions
+                showTab('voting');
+                loadGroupedQuestions(group);
+            }
+            
+            // Remove notification
+            button.closest('.group-invitation-notification').remove();
+        }
+
+        function declineGroupInvitation(button) {
+            showNotification('No problem! You can always accept later if you change your mind.');
+            button.closest('.group-invitation-notification').remove();
+        }
+
+        function loadGroupedQuestions(group) {
+            // Use the pre-made sports questions for the NBA group
+            if (group.name === "NBA Rule Changes 2024") {
+                shuffledIdeas = [...sportsGroupedQuestions];
+            } else {
+                // For other groups, use existing questions but mark them as grouped
+                const groupedIdeas = shuffleArray(ideas).slice(0, group.questionCount);
+                
+                // Mark these as grouped questions
+                groupedIdeas.forEach(idea => {
+                    idea.isGrouped = true;
+                    idea.groupName = group.name;
+                    idea.groupIncentive = group.incentiveMessage;
+                });
+                
+                shuffledIdeas = groupedIdeas;
+            }
+            
+            currentIdeaIndex = 0;
+            loadNextIdea();
+            
+            // Show grouped question indicator
+            showGroupedQuestionIndicator(group);
+        }
+
+        function showGroupedQuestionIndicator(group) {
+            const indicator = document.createElement('div');
+            indicator.className = 'grouped-question-indicator';
+            indicator.innerHTML = `
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; border-radius: 10px; margin: 10px 0; text-align: center;">
+                    <h4>🎯 Group: ${group.name}</h4>
+                    <p>You're answering ${group.questionCount} focused questions</p>
+                    ${group.incentiveMessage ? `<p><strong>🎁 ${group.incentiveMessage}</strong></p>` : ''}
+                </div>
+            `;
+            
+            const cardContainer = document.getElementById('cardContainer');
+            cardContainer.insertBefore(indicator, cardContainer.firstChild);
+        }
+
+        function showUpgradeModal() {
+            showNotification('Upgrade to Premium, Pro, or Enterprise to unlock Grouped Questions!');
+        }
+
+        function updateCharacterLimits() {
             const descTextarea = document.getElementById('ideaDescription');
             const descCount = document.getElementById('descCount');
             const premiumLimit = document.getElementById('premiumLimit');
             
-            switch(tier) {
+            if (!descTextarea) return; // Function might be called before elements exist
+            
+            switch(selectedTier) {
                 case 'free':
                     descTextarea.maxLength = 300;
                     descCount.textContent = descTextarea.value.length;
