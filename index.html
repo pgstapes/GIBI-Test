@@ -531,6 +531,14 @@
             display: none !important;
         }
 
+        .media-video::-webkit-media-controls-fullscreen-button {
+            display: none !important;
+        }
+
+        .media-video::-webkit-media-controls-picture-in-picture-button {
+            display: none !important;
+        }
+
         .media-caption {
             font-size: 0.8rem;
             color: #666;
@@ -4201,7 +4209,7 @@
                     `;
                 } else if (idea.media.type === 'video') {
                     mediaContainer.innerHTML = `
-                        <video src="${idea.media.url}" class="media-video" autoplay muted loop controls>
+                        <video src="${idea.media.url}" class="media-video" autoplay muted loop controls disablePictureInPicture>
                             Your browser does not support the video tag.
                         </video>
                         <div class="media-caption">${idea.media.caption}</div>
@@ -5024,17 +5032,111 @@
             if (followedIdeasList.length === 0) {
                 followedIdeasContainer.innerHTML = '<p style="text-align: center; color: #666; padding: 40px;">You haven\'t followed any ideas yet. Vote on some ideas and follow them to see outcomes here!</p>';
             } else {
-                followedIdeasContainer.innerHTML = followedIdeasList.map(idea => `
-                    <div style="border: 1px solid #eee; border-radius: 10px; padding: 15px; margin: 10px 0; background: white;">
-                        <h3 style="margin: 0 0 10px 0; color: #333;">${idea.title}</h3>
-                        <p style="color: #666; margin: 0 0 10px 0;">${idea.description.substring(0, 100)}...</p>
-                        <div style="display: flex; justify-content: space-between; margin-top: 10px; align-items: center;">
-                            <span style="color: #2ed573;">👍 ${idea.votes.good || 0}</span>
-                            <span style="color: #ff4757;">👎 ${idea.votes.bad || 0}</span>
-                            <span style="color: #667eea; font-weight: bold;">Following</span>
+                followedIdeasContainer.innerHTML = followedIdeasList.map(idea => {
+                    // Generate outcome status and progress
+                    const totalVotes = (idea.votes.good || 0) + (idea.votes.bad || 0) + (idea.votes.a || 0) + (idea.votes.b || 0);
+                    const outcomeStatus = totalVotes > 50 ? 'Completed' : totalVotes > 20 ? 'In Progress' : 'Gathering Votes';
+                    const progressPercentage = Math.min((totalVotes / 50) * 100, 100);
+                    
+                    // Generate decision result
+                    let decisionResult = '';
+                    if (idea.type === 'choice') {
+                        const choiceAVotes = idea.votes.a || 0;
+                        const choiceBVotes = idea.votes.b || 0;
+                        if (choiceAVotes > choiceBVotes) {
+                            decisionResult = `✅ Community chose: ${idea.choiceA}`;
+                        } else if (choiceBVotes > choiceAVotes) {
+                            decisionResult = `✅ Community chose: ${idea.choiceB}`;
+                        } else {
+                            decisionResult = '🤝 Community is split';
+                        }
+                    } else {
+                        const goodVotes = idea.votes.good || 0;
+                        const badVotes = idea.votes.bad || 0;
+                        if (goodVotes > badVotes) {
+                            decisionResult = '✅ Community says: GOOD IDEA';
+                        } else if (badVotes > goodVotes) {
+                            decisionResult = '❌ Community says: BAD IDEA';
+                        } else {
+                            decisionResult = '🤝 Community is split';
+                        }
+                    }
+                    
+                    // Generate metadata display
+                    const metadataDisplay = [];
+                    if (idea.qualityBadge) {
+                        metadataDisplay.push(`<span class="quality-badge ${idea.qualityBadge}">${idea.qualityBadge}</span>`);
+                    }
+                    if (idea.reputation) {
+                        const fullStars = Math.floor(idea.reputation);
+                        const hasHalfStar = idea.reputation % 1 >= 0.5;
+                        const stars = '★'.repeat(fullStars) + (hasHalfStar ? '☆' : '') + '☆'.repeat(5 - fullStars - (hasHalfStar ? 1 : 0));
+                        metadataDisplay.push(`<span class="reputation-score"><span class="stars">${stars}</span> <span class="score">${idea.reputation.toFixed(1)}</span></span>`);
+                    }
+                    if (idea.tier) {
+                        metadataDisplay.push(`<span class="tier-badge ${idea.tier}">${idea.tier}</span>`);
+                    }
+                    
+                    return `
+                        <div style="border: 1px solid #eee; border-radius: 10px; padding: 20px; margin: 15px 0; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                                <div style="flex: 1;">
+                                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                                        <span style="background: #667eea; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: bold;">${idea.category}</span>
+                                        ${metadataDisplay.join('')}
+                                    </div>
+                                    <h3 style="margin: 0 0 8px 0; color: #333; font-size: 1.1rem;">${idea.title}</h3>
+                                    <p style="color: #666; margin: 0 0 12px 0; line-height: 1.4;">${idea.description}</p>
+                                    ${idea.targetAudience ? `<p style="color: #667eea; font-size: 0.8rem; margin: 0 0 8px 0;"><strong>Target:</strong> ${idea.targetAudience}</p>` : ''}
+                                    <p style="color: #888; font-size: 0.8rem; margin: 0;">— ${idea.author}</p>
+                                </div>
+                                <div style="text-align: right; margin-left: 15px;">
+                                    <div style="background: ${outcomeStatus === 'Completed' ? '#4caf50' : outcomeStatus === 'In Progress' ? '#ff9800' : '#9e9e9e'}; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: bold; margin-bottom: 8px;">
+                                        ${outcomeStatus}
+                                    </div>
+                                    <div style="font-size: 0.8rem; color: #666;">
+                                        ${totalVotes} total votes
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div style="margin: 12px 0;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                                    <span style="font-size: 0.8rem; color: #666;">Progress</span>
+                                    <span style="font-size: 0.8rem; color: #666;">${Math.round(progressPercentage)}%</span>
+                                </div>
+                                <div style="background: #f0f0f0; border-radius: 10px; height: 6px; overflow: hidden;">
+                                    <div style="background: linear-gradient(90deg, #667eea, #764ba2); height: 100%; width: ${progressPercentage}%; transition: width 0.3s ease;"></div>
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin: 12px 0;">
+                                <div style="display: flex; gap: 15px;">
+                                    ${idea.type === 'choice' ? `
+                                        <span style="color: #2ed573; font-weight: bold;">👈 ${idea.choiceA}: ${idea.votes.a || 0}</span>
+                                        <span style="color: #ff4757; font-weight: bold;">👉 ${idea.choiceB}: ${idea.votes.b || 0}</span>
+                                    ` : `
+                                        <span style="color: #2ed573; font-weight: bold;">👍 ${idea.votes.good || 0}</span>
+                                        <span style="color: #ff4757; font-weight: bold;">👎 ${idea.votes.bad || 0}</span>
+                                    `}
+                                </div>
+                                <span style="color: #667eea; font-weight: bold; font-size: 0.9rem;">Following</span>
+                            </div>
+                            
+                            ${outcomeStatus === 'Completed' ? `
+                                <div style="background: #f8f9fa; border-left: 4px solid #4caf50; padding: 12px; border-radius: 4px; margin-top: 12px;">
+                                    <div style="font-weight: bold; color: #333; margin-bottom: 4px;">Final Decision:</div>
+                                    <div style="color: #4caf50; font-weight: bold;">${decisionResult}</div>
+                                </div>
+                            ` : ''}
+                            
+                            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
+                                <button style="background: #667eea; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;" onclick="unfollowIdea(${idea.id})">Unfollow</button>
+                                <button style="background: #f0f0f0; color: #666; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;" onclick="shareOutcome(${idea.id})">Share</button>
+                            </div>
                         </div>
-                    </div>
-                `).join('');
+                    `;
+                }).join('');
             }
         }
 
@@ -5175,6 +5277,30 @@
             }, 300);
             
             showNotification('Welcome back to regular voting!');
+        }
+
+        function unfollowIdea(ideaId) {
+            followedIdeas = followedIdeas.filter(id => id !== ideaId);
+            populateFollowedIdeas();
+            showNotification('Idea unfollowed successfully');
+        }
+
+        function shareOutcome(ideaId) {
+            const idea = ideas.find(i => i.id === ideaId);
+            if (idea) {
+                const shareText = `Check out this community decision: "${idea.title}" - ${idea.description.substring(0, 100)}...`;
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Community Decision',
+                        text: shareText,
+                        url: window.location.href
+                    });
+                } else {
+                    // Fallback for browsers that don't support Web Share API
+                    navigator.clipboard.writeText(shareText);
+                    showNotification('Outcome copied to clipboard!');
+                }
+            }
         }
     </script>
 </body>
