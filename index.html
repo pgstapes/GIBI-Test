@@ -3072,12 +3072,15 @@
     <script>
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
-            showPage('vote');
+            showTab('voting');
             loadNextIdea();
+            setupSwipeFunctionality();
             updateStats();
             
             // Auto-trigger sports group invitation for testing
-            triggerSportsGroupInvitation();
+            setTimeout(() => {
+                triggerSportsGroupInvitation();
+            }, 2000);
         });
 
         // Core app data
