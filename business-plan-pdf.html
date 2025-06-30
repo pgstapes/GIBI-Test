@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Good Idea / Bad Idea - Business Plan</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            max-width: 210mm;
+            margin: 0 auto;
+            padding: 20mm;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #2d3748;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: #718096;
+            font-weight: 400;
+        }
+        
+        .executive-summary {
+            background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 100%);
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .executive-summary h2 {
+            color: #2d3748;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .executive-summary p {
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-bottom: 20px;
+        }
+        
+        .key-props {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .key-prop {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .key-prop h4 {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin: 40px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #4a5568;
+            margin: 30px 0 15px 0;
+        }
+        
+        h4 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #2d3748;
+            margin: 20px 0 10px 0;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            color: #4a5568;
+        }
+        
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            color: #4a5568;
+        }
+        
+        .market-segments {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .market-segment {
+            background: #f7fafc;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .market-segment h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .market-size {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .market-size h4 {
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .competitors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .competitor {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+        }
+        
+        .competitor h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .revenue-streams {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .revenue-stream {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .revenue-stream h4 {
+            color: white;
+            margin-bottom: 10px;
+        }
+        
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .pricing-table th {
+            background: #667eea;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .pricing-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .pricing-table tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        .financial-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .financial-table th {
+            background: #2d3748;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .financial-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        
+        .financial-table tr:nth-child(even) {
+            background: #f7fafc;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .metric {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+        
+        .metric .number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .metric .label {
+            font-size: 0.9rem;
+            color: #718096;
+        }
+        
+        .timeline {
+            background: #f7fafc;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .timeline h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+        
+        .next-steps {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin: 40px 0;
+        }
+        
+        .next-steps h2 {
+            color: white;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .next-steps h3 {
+            color: white;
+        }
+        
+        .next-steps ul {
+            color: rgba(255,255,255,0.9);
+        }
+        
+        @media print {
+            body {
+                max-width: none;
+                margin: 0;
+                padding: 15mm;
+            }
+            
+            .header h1 {
+                -webkit-text-fill-color: #667eea;
+            }
+            
+            .revenue-stream {
+                background: #667eea !important;
+                -webkit-print-color-adjust: exact;
+            }
+            
+            .next-steps {
+                background: #667eea !important;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Good Idea / Bad Idea</h1>
+        <div class="subtitle">Business Plan</div>
+    </div>
+
+    <div class="executive-summary">
+        <h2>Executive Summary</h2>
+        <p><strong>Good Idea/Bad Idea</strong> is a social decision-making platform that allows users to vote on ideas through an intuitive swipe interface. The app combines the addictive mechanics of dating apps with practical decision-making use cases, creating a unique market position.</p>
+        
+        <div class="key-props">
+            <div class="key-prop">
+                <h4>Universal Appeal</h4>
+                <p>Works for personal, social, and business decisions</p>
+            </div>
+            <div class="key-prop">
+                <h4>Familiar UX</h4>
+                <p>Leverages proven swipe mechanics users already understand</p>
+            </div>
+            <div class="key-prop">
+                <h4>Social Integration</h4>
+                <p>Enables group decision-making and idea sharing</p>
+            </div>
+            <div class="key-prop">
+                <h4>Gamification</h4>
+                <p>Points, badges, and leaderboards drive engagement</p>
+            </div>
+        </div>
+    </div>
+
+    <h2>Market Analysis</h2>
+    
+    <h3>Target Market Segments</h3>
+    
+    <div class="market-segments">
+        <div class="market-segment">
+            <h4>Primary Market (18-35 years old)</h4>
+            <ul>
+                <li><strong>Size:</strong> ~2.5 billion people globally</li>
+                <li><strong>Characteristics:</strong> Tech-savvy, social media active, decision-making needs</li>
+                <li><strong>Use Cases:</strong> Personal choices, social planning, entertainment decisions</li>
+            </ul>
+        </div>
+        
+        <div class="market-segment">
+            <h4>Secondary Market (35-50 years old)</h4>
+            <ul>
+                <li><strong>Size:</strong> ~1.8 billion people globally</li>
+                <li><strong>Characteristics:</strong> Professional decision-makers, group leaders</li>
+                <li><strong>Use Cases:</strong> Team decisions, project planning, family choices</li>
+            </ul>
+        </div>
+        
+        <div class="market-segment">
+            <h4>Tertiary Market (Business/Enterprise)</h4>
+            <ul>
+                <li><strong>Size:</strong> Growing market for decision-making tools</li>
+                <li><strong>Characteristics:</strong> Teams, organizations, event planners</li>
+                <li><strong>Use Cases:</strong> Team building, product feedback, event planning</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>Market Size & Opportunity</h3>
+    
+    <div class="market-size">
+        <h4>Total Addressable Market (TAM)</h4>
+        <ul>
+            <li><strong>Social Media Users:</strong> 4.9 billion globally</li>
+            <li><strong>Decision-Making Apps:</strong> $2.3 billion market (2023)</li>
+            <li><strong>Mobile App Market:</strong> $935 billion globally</li>
+        </ul>
+    </div>
+    
+    <div class="market-size">
+        <h4>Serviceable Addressable Market (SAM)</h4>
+        <ul>
+            <li><strong>Active Social Media Users:</strong> 3.2 billion</li>
+            <li><strong>Decision-Making Tool Users:</strong> 500 million</li>
+            <li><strong>Estimated SAM:</strong> $15-25 billion</li>
+        </ul>
+    </div>
+    
+    <div class="market-size">
+        <h4>Serviceable Obtainable Market (SOM)</h4>
+        <ul>
+            <li><strong>Year 1 Target:</strong> 100,000 users</li>
+            <li><strong>Year 3 Target:</strong> 1 million users</li>
+            <li><strong>Year 5 Target:</strong> 5 million users</li>
+        </ul>
+    </div>
+
+    <h2>Competitive Analysis</h2>
+    
+    <h3>Direct Competitors</h3>
+    
+    <div class="competitors">
+        <div class="competitor">
+            <h4>Decision Roulette</h4>
+            <ul>
+                <li><strong>Strengths:</strong> Simple, free</li>
+                <li><strong>Weaknesses:</strong> No social features, limited use cases</li>
+                <li><strong>Market Position:</strong> Basic utility app</li>
+            </ul>
+        </div>
+        
+        <div class="competitor">
+            <h4>Coin Flip</h4>
+            <ul>
+                <li><strong>Strengths:</strong> Extremely simple</li>
+                <li><strong>Weaknesses:</strong> Too basic, no social aspect</li>
+                <li><strong>Market Position:</strong> Basic utility</li>
+            </ul>
+        </div>
+        
+        <div class="competitor">
+            <h4>Decision Tree</h4>
+            <ul>
+                <li><strong>Strengths:</strong> Comprehensive, analytical</li>
+                <li><strong>Weaknesses:</strong> Complex, not mobile-friendly</li>
+                <li><strong>Market Position:</strong> Professional tool</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>Competitive Advantages</h3>
+    <ul>
+        <li><strong>Unique Positioning:</strong> Only app combining swipe mechanics with decision-making</li>
+        <li><strong>Social Features:</strong> Built-in group functionality</li>
+        <li><strong>Versatility:</strong> Works for personal, social, and business decisions</li>
+        <li><strong>Mobile-First:</strong> Optimized for mobile decision-making</li>
+    </ul>
+
+    <h2>Business Model</h2>
+    
+    <h3>Revenue Streams</h3>
+    
+    <div class="revenue-streams">
+        <div class="revenue-stream">
+            <h4>1. Freemium Model</h4>
+            <ul>
+                <li>Free Tier: Basic features, limited ideas per day</li>
+                <li>Premium Tier ($4.99/month): Unlimited ideas, advanced analytics</li>
+                <li>Pro Tier ($9.99/month): Team features, custom branding, API access</li>
+            </ul>
+        </div>
+        
+        <div class="revenue-stream">
+            <h4>2. Advertising</h4>
+            <ul>
+                <li>Display Ads: Non-intrusive banner ads</li>
+                <li>Sponsored Ideas: Promoted content from brands</li>
+                <li>Category Sponsorship: Branded categories</li>
+            </ul>
+        </div>
+        
+        <div class="revenue-stream">
+            <h4>3. Data Insights</h4>
+            <ul>
+                <li>Market Research: Aggregate decision patterns</li>
+                <li>Trend Analysis: Popular ideas by demographic</li>
+                <li>Business Intelligence: Decision-making insights</li>
+            </ul>
+        </div>
+        
+        <div class="revenue-stream">
+            <h4>4. White-Label Solutions</h4>
+            <ul>
+                <li>Enterprise Version: Custom branded for companies</li>
+                <li>Event Planning: Specialized version for organizers</li>
+                <li>Educational: Version for schools and universities</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>Pricing Strategy</h3>
+    
+    <table class="pricing-table">
+        <thead>
+            <tr>
+                <th>Plan</th>
+                <th>Price</th>
+                <th>Features</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Free</strong></td>
+                <td>$0/month</td>
+                <td>10 ideas per day, basic categories, standard support</td>
+            </tr>
+            <tr>
+                <td><strong>Premium</strong></td>
+                <td>$4.99/month</td>
+                <td>Unlimited ideas, all categories, advanced analytics, priority support, ad-free</td>
+            </tr>
+            <tr>
+                <td><strong>Pro</strong></td>
+                <td>$9.99/month</td>
+                <td>Everything in Premium + team features, custom branding, API access, dedicated support</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>Marketing Strategy</h2>
+    
+    <h3>User Acquisition</h3>
+    
+    <div class="timeline">
+        <h4>Phase 1: MVP Launch (Months 1-3)</h4>
+        <ul>
+            <li><strong>Target:</strong> 1,000 early adopters</li>
+            <li><strong>Channels:</strong> Product Hunt launch, Reddit communities, personal networks, tech blogs</li>
+        </ul>
+    </div>
+    
+    <div class="timeline">
+        <h4>Phase 2: Growth (Months 4-12)</h4>
+        <ul>
+            <li><strong>Target:</strong> 100,000 users</li>
+            <li><strong>Channels:</strong> Social media marketing, influencer partnerships, app store optimization, viral sharing</li>
+        </ul>
+    </div>
+    
+    <div class="timeline">
+        <h4>Phase 3: Scale (Months 13-24)</h4>
+        <ul>
+            <li><strong>Target:</strong> 1 million users</li>
+            <li><strong>Channels:</strong> Paid advertising, PR and media coverage, strategic partnerships, international expansion</li>
+        </ul>
+    </div>
+
+    <h2>Financial Projections</h2>
+    
+    <h3>Revenue Projections (5 years)</h3>
+    
+    <table class="financial-table">
+        <thead>
+            <tr>
+                <th>Year</th>
+                <th>Users</th>
+                <th>Conversion Rate</th>
+                <th>Premium Users</th>
+                <th>Revenue</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>100K</td>
+                <td>2%</td>
+                <td>2,000</td>
+                <td>$120K</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>500K</td>
+                <td>3%</td>
+                <td>15,000</td>
+                <td>$900K</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>1M</td>
+                <td>4%</td>
+                <td>40,000</td>
+                <td>$2.4M</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>2.5M</td>
+                <td>5%</td>
+                <td>125,000</td>
+                <td>$7.5M</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>5M</td>
+                <td>6%</td>
+                <td>300,000</td>
+                <td>$18M</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Success Metrics</h3>
+    
+    <div class="metrics-grid">
+        <div class="metric">
+            <div class="number">100K</div>
+            <div class="label">Year 1 Users</div>
+        </div>
+        <div class="metric">
+            <div class="number">1M</div>
+            <div class="label">Year 3 Users</div>
+        </div>
+        <div class="metric">
+            <div class="number">5M</div>
+            <div class="label">Year 5 Users</div>
+        </div>
+        <div class="metric">
+            <div class="number">$18M</div>
+            <div class="label">Year 5 Revenue</div>
+        </div>
+    </div>
+
+    <div class="next-steps">
+        <h2>Next Steps</h2>
+        
+        <h3>Immediate Actions (Next 30 days)</h3>
+        <ul>
+            <li>User Research: Interview 50 potential users</li>
+            <li>Competitive Analysis: Deep dive into competitors</li>
+            <li>Technical Planning: Finalize tech stack and architecture</li>
+            <li>Team Building: Identify key hires needed</li>
+        </ul>
+        
+        <h3>Short-term Goals (Next 3 months)</h3>
+        <ul>
+            <li>MVP Development: Build core functionality</li>
+            <li>Beta Testing: Launch with 100 beta users</li>
+            <li>Feedback Collection: Gather user feedback and iterate</li>
+            <li>Marketing Preparation: Plan launch strategy</li>
+        </ul>
+        
+        <h3>Medium-term Goals (Next 12 months)</h3>
+        <ul>
+            <li>Public Launch: Launch on app stores</li>
+            <li>User Acquisition: Reach 100,000 users</li>
+            <li>Revenue Generation: Achieve $120K annual revenue</li>
+            <li>Team Expansion: Build core team of 5-10 people</li>
+        </ul>
+    </div>
+
+    <p style="text-align: center; margin-top: 40px; color: #718096; font-style: italic;">
+        This business plan provides a comprehensive roadmap for building and scaling the Good Idea/Bad Idea platform into a successful, profitable business.
+    </p>
+</body>
+</html> 

@@ -23,7 +23,7 @@
         .header {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
-            padding: 15px 20px;
+            padding: 8px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -40,7 +40,7 @@
         }
 
         .logo-text {
-            font-size: 2rem;
+            font-size: 1.6rem;
             font-weight: bold;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             -webkit-background-clip: text;
@@ -52,7 +52,7 @@
         .logo-subtitle {
             font-size: 0.7rem;
             color: #666;
-            margin-top: -5px;
+            margin-top: -4px;
         }
 
         .header-buttons {
@@ -65,12 +65,12 @@
             background: rgba(102, 126, 234, 0.1);
             border: 2px solid rgba(102, 126, 234, 0.2);
             cursor: pointer;
-            padding: 10px 16px;
+            padding: 8px 14px;
             display: flex;
             align-items: center;
             justify-content: center;
             min-width: 60px;
-            height: 40px;
+            height: 34px;
             border-radius: 20px;
             transition: all 0.3s ease;
             font-weight: 600;
@@ -395,10 +395,10 @@
             border-radius: 20px;
             padding: 25px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin: 20px auto;
+            margin: 0 auto;
             max-width: 400px;
-            min-height: 500px;
-            height: 500px;
+            min-height: 550px;
+            height: 550px;
             position: relative;
             transition: transform 0.3s ease;
             cursor: grab;
@@ -586,7 +586,7 @@
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin: 20px 0;
+            margin: 10px 0;
             width: 100%;
             max-width: 400px;
             margin-left: auto;
@@ -594,46 +594,54 @@
         }
 
         .action-button {
-            width: 60px;
-            height: 60px;
-            border: none;
+            width: 65px;
+            height: 65px;
+            border: 3px solid rgba(255, 255, 255, 0.5);
             border-radius: 50%;
-            font-size: 24px;
+            font-size: 30px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .action-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .action-button:active {
+            transform: scale(1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .action-button.skip {
-            background: #f39c12;
+            background: linear-gradient(135deg, #ffda79 0%, #f39c12 100%);
             color: white;
         }
 
         .action-button.skip:hover {
-            background: #e67e22;
-            transform: scale(1.1);
+            background: linear-gradient(135deg, #ffe291 0%, #fab937 100%);
         }
 
         .action-button.bad {
-            background: #ff4757;
+            background: linear-gradient(135deg, #ff758c 0%, #ff4d4d 100%);
             color: white;
         }
 
         .action-button.bad:hover {
-            background: #ff3742;
-            transform: scale(1.1);
+            background: linear-gradient(135deg, #ff8a9e 0%, #ff6b6b 100%);
         }
 
         .action-button.good {
-            background: #2ed573;
+            background: linear-gradient(135deg, #4dff88 0%, #2ed573 100%);
             color: white;
         }
 
         .action-button.good:hover {
-            background: #26d0aa;
-            transform: scale(1.1);
+            background: linear-gradient(135deg, #6bff9f 0%, #3fe08b 100%);
         }
 
         .swipe-overlay {
@@ -1983,38 +1991,58 @@
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin: 20px 0;
+            margin: 10px 0;
         }
 
         .action-button {
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
+            border: 3px solid rgba(255, 255, 255, 0.5);
             border-radius: 50%;
-            border: none;
-            font-size: 1.5rem;
+            font-size: 30px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
 
         .action-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .action-button.good {
-            background: #4CAF50;
-            color: white;
-        }
-
-        .action-button.bad {
-            background: #f44336;
-            color: white;
+        .action-button:active {
+            transform: scale(1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .action-button.skip {
-            background: #FF9800;
+            background: linear-gradient(135deg, #ffda79 0%, #f39c12 100%);
             color: white;
+        }
+
+        .action-button.skip:hover {
+            background: linear-gradient(135deg, #ffe291 0%, #fab937 100%);
+        }
+
+        .action-button.bad {
+            background: linear-gradient(135deg, #ff758c 0%, #ff4d4d 100%);
+            color: white;
+        }
+
+        .action-button.bad:hover {
+            background: linear-gradient(135deg, #ff8a9e 0%, #ff6b6b 100%);
+        }
+
+        .action-button.good {
+            background: linear-gradient(135deg, #4dff88 0%, #2ed573 100%);
+            color: white;
+        }
+
+        .action-button.good:hover {
+            background: linear-gradient(135deg, #6bff9f 0%, #3fe08b 100%);
         }
 
         .stats {
@@ -2909,7 +2937,7 @@
         .swipe-feedback {
             position: fixed;
             top: 0;
-            width: 100px;
+            width: 250px;
             height: 100vh;
             pointer-events: none;
             z-index: 1000;
@@ -2939,27 +2967,25 @@
 
         .swipe-feedback .feedback-icon {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 48px;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            padding: 0 25px;
+            word-wrap: break-word;
+            font-size: 40px;
             color: white;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .swipe-feedback.left .feedback-icon {
-            right: 20px;
-        }
-
-        .swipe-feedback.right .feedback-icon {
-            left: 20px;
-        }
-
+        .swipe-feedback.left .feedback-icon,
         .swipe-feedback.choice-left .feedback-icon {
-            right: 20px;
+            text-align: left;
         }
 
+        .swipe-feedback.right .feedback-icon,
         .swipe-feedback.choice-right .feedback-icon {
-            left: 20px;
+            text-align: right;
         }
 
         .metadata-row {
@@ -3569,6 +3595,10 @@
                     
                     // Show feedback based on direction and question type
                     const idea = shuffledIdeas[currentIdeaIndex];
+                    if (idea.type === 'choice') {
+                        document.querySelector('#swipeFeedbackChoiceLeft .feedback-icon').textContent = document.getElementById('choiceA').textContent;
+                        document.querySelector('#swipeFeedbackChoiceRight .feedback-icon').textContent = document.getElementById('choiceB').textContent;
+                    }
                     if (diffX > 0) {
                         showFeedback('right', idea.type === 'choice');
                     } else {
@@ -3630,6 +3660,11 @@
                     
                     // Show feedback based on direction and question type
                     const idea = shuffledIdeas[currentIdeaIndex];
+                    if (idea.type === 'choice') {
+                        document.querySelector('#swipeFeedbackChoiceLeft .feedback-icon').textContent = document.getElementById('choiceA').textContent;
+                        document.querySelector('#swipeFeedbackChoiceRight .feedback-icon').textContent = document.getElementById('choiceB').textContent;
+                    }
+
                     if (diffX > 0) {
                         showFeedback('right', idea.type === 'choice');
                     } else {
@@ -5080,7 +5115,7 @@
                     return `
                         <div style="border: 1px solid #eee; border-radius: 10px; padding: 20px; margin: 15px 0; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
-                                <div style="flex: 1;">
+                                <div style="flex: 1; min-width: 0;">
                                     <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
                                         <span style="background: #667eea; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: bold;">${idea.category}</span>
                                         ${metadataDisplay.join('')}
