@@ -2466,6 +2466,25 @@
                 padding: 12px 20px;
                 font-size: 0.9rem;
             }
+
+            /* Fix history modal scrolling on mobile */
+            .history-modal-content {
+                max-width: 98vw;
+                width: 98vw;
+                height: 98vh;
+                max-height: 98vh;
+                display: flex;
+                flex-direction: column;
+                padding: 0;
+            }
+            .history-modal-header {
+                padding: 18px 18px 0 18px;
+            }
+            .history-list {
+                flex: 1 1 auto;
+                overflow-y: auto;
+                padding: 18px;
+            }
         }
 
         .page-navigation {
@@ -3083,6 +3102,161 @@
             border-radius: 6px;
             border-left: 3px solid #667eea;
         }
+
+        #outcomes-tab .outcome-content {
+            background: none;
+            padding: 0;
+            box-shadow: none;
+            border-radius: 0;
+            max-width: 100%;
+            width: 100%;
+        }
+
+        .history-button {
+            background: rgba(102, 126, 234, 0.1);
+            border: 2px solid rgba(102, 126, 234, 0.2);
+            cursor: pointer;
+            padding: 8px 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            height: 34px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: #667eea;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+        }
+        .history-button:hover {
+            background: rgba(102, 126, 234, 0.2);
+            border-color: rgba(102, 126, 234, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.25);
+        }
+
+        .history-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        .history-modal-content {
+            background: white;
+            border-radius: 18px;
+            max-width: 420px;
+            width: 95vw;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            padding: 28px 18px 18px 18px;
+            position: relative;
+        }
+        .history-modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            position: sticky;
+            top: 0;
+            background: white;
+            z-index: 10;
+            box-shadow: 0 2px 8px rgba(102,126,234,0.08);
+        }
+        .history-modal-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .close-history {
+            background: none;
+            border: none;
+            font-size: 1.7rem;
+            color: #667eea;
+            cursor: pointer;
+            padding: 0 8px;
+        }
+        .history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .history-entry {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 14px 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            box-shadow: 0 2px 6px rgba(102,126,234,0.06);
+        }
+        .history-entry-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .history-question-title {
+            font-weight: 600;
+            color: #333;
+            font-size: 1rem;
+            flex: 1;
+            min-width: 0;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .history-vote {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-left: 8px;
+        }
+        .history-tallies {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 2px;
+        }
+        .history-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 6px;
+        }
+        .history-action-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 6px 14px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .history-action-btn:disabled {
+            background: #ccc;
+            color: #888;
+            cursor: not-allowed;
+        }
+        .history-action-btn.revisit {
+            background: #ffd700;
+            color: #333;
+        }
+        .history-action-btn.revisit:disabled {
+            background: #f3e5ab;
+            color: #aaa;
+        }
+        .history-entry-info {
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 2px;
+        }
     </style>
 </head>
 <body>
@@ -3109,6 +3283,7 @@
         <div class="header-buttons">
             <button class="header-nav-button vote-button" onclick="showTab('voting')" title="Vote">Vote</button>
             <button class="header-nav-button header-submit-button" onclick="showTab('submit')" title="Submit">Submit</button>
+            <button class="history-button" onclick="openHistoryModal()" title="History">🕑</button>
             <button class="hamburger-menu" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
@@ -3497,6 +3672,19 @@
     <!-- Menu Overlay -->
     <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
 
+    <!-- History Modal -->
+    <div id="historyModal" class="history-modal" style="display: none;">
+        <div class="history-modal-content">
+            <div class="history-modal-header">
+                <span class="history-modal-title">Your Choice History</span>
+                <button class="close-history" onclick="closeHistoryModal()">&times;</button>
+            </div>
+            <div class="history-list" id="historyList">
+                <!-- History entries will be populated here -->
+            </div>
+        </div>
+    </div>
+
     <script>
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
@@ -3718,7 +3906,13 @@
                 qualityBadge: "verified",
                 reputation: 4.8,
                 tier: "pro",
-                targetAudience: "Entrepreneurs"
+                targetAudience: "Entrepreneurs",
+                outcome: {
+                    status: 'decided',
+                    decision: 'Ordered Pizza!',
+                    update: "The community overwhelmingly voted for pizza, so we went for it! We got a large pepperoni and a veggie lovers. It was delicious. Thanks for the help, everyone!",
+                    updateDate: "1 day ago"
+                }
             },
             {
                 id: 2,
@@ -3732,7 +3926,13 @@
                 qualityBadge: "expert",
                 reputation: 4.9,
                 tier: "pro",
-                targetAudience: "Software developers"
+                targetAudience: "Software developers",
+                outcome: {
+                    status: 'in-progress',
+                    decision: 'Started learning Rust.',
+                    update: "Based on the feedback, I've started the Rustlings course and I'm really enjoying the compiler's feedback. It's tough but rewarding. Will post another update in a month!",
+                    updateDate: "3 days ago"
+                }
             },
             {
                 id: 3,
@@ -4306,6 +4506,7 @@
 
         function vote(voteType) {
             const idea = shuffledIdeas[currentIdeaIndex];
+            recordUserHistory(idea, voteType);
             
             if (voteType === 'good') {
                 goodCount++;
@@ -4359,6 +4560,7 @@
 
         function voteChoice(choice) {
             const idea = shuffledIdeas[currentIdeaIndex];
+            recordUserHistory(idea, choice);
             idea.votes[choice]++;
             
             // Update vote display
@@ -5113,61 +5315,68 @@
                     }
                     
                     return `
-                        <div style="border: 1px solid #eee; border-radius: 10px; padding: 20px; margin: 15px 0; background: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                        <div style="border: 1px solid #e0e0e0; border-radius: 15px; padding: 20px; margin: 15px auto; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.08); max-width: 400px;">
+                            <!-- Header -->
+                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
                                 <div style="flex: 1; min-width: 0;">
-                                    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
-                                        <span style="background: #667eea; color: white; padding: 2px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: bold;">${idea.category}</span>
-                                        ${metadataDisplay.join('')}
-                                    </div>
-                                    <h3 style="margin: 0 0 8px 0; color: #333; font-size: 1.1rem;">${idea.title}</h3>
-                                    <p style="color: #666; margin: 0 0 12px 0; line-height: 1.4;">${idea.description}</p>
-                                    ${idea.targetAudience ? `<p style="color: #667eea; font-size: 0.8rem; margin: 0 0 8px 0;"><strong>Target:</strong> ${idea.targetAudience}</p>` : ''}
-                                    <p style="color: #888; font-size: 0.8rem; margin: 0;">— ${idea.author}</p>
+                                    <span style="background: #667eea; color: white; padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase;">${idea.category}</span>
+                                    <h3 style="margin: 10px 0 5px 0; color: #333; font-size: 1.2rem; line-height: 1.3;">${idea.title}</h3>
+                                    <p style="color: #666; margin: 0; font-size: 0.8rem; font-style: italic;">by ${idea.author}</p>
                                 </div>
-                                <div style="text-align: right; margin-left: 15px;">
-                                    <div style="background: ${outcomeStatus === 'Completed' ? '#4caf50' : outcomeStatus === 'In Progress' ? '#ff9800' : '#9e9e9e'}; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.7rem; font-weight: bold; margin-bottom: 8px;">
-                                        ${outcomeStatus}
-                                    </div>
-                                    <div style="font-size: 0.8rem; color: #666;">
-                                        ${totalVotes} total votes
-                                    </div>
+                                <div style="background: ${outcomeStatus === 'Completed' ? '#e8f5e8' : outcomeStatus === 'In Progress' ? '#fff3e0' : '#f5f5f5'};
+                                            color: ${outcomeStatus === 'Completed' ? '#2d5a2d' : outcomeStatus === 'In Progress' ? '#e65100' : '#616161'};
+                                            padding: 4px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: bold; white-space: nowrap; margin-left: 10px;">
+                                    ${outcomeStatus}
                                 </div>
                             </div>
-                            
-                            <div style="margin: 12px 0;">
+
+                            <!-- Metadata -->
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid #f0f0f0;">
+                                ${metadataDisplay.join('')}
+                            </div>
+
+                            <!-- Progress -->
+                            <div style="margin-bottom: 15px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                                    <span style="font-size: 0.8rem; color: #666;">Progress</span>
-                                    <span style="font-size: 0.8rem; color: #666;">${Math.round(progressPercentage)}%</span>
+                                    <span style="font-size: 0.8rem; color: #666; font-weight: 500;">Voting Progress</span>
+                                    <span style="font-size: 0.8rem; color: #333; font-weight: 600;">${totalVotes} Votes</span>
                                 </div>
-                                <div style="background: #f0f0f0; border-radius: 10px; height: 6px; overflow: hidden;">
+                                <div style="background: #f0f0f0; border-radius: 10px; height: 8px; overflow: hidden;">
                                     <div style="background: linear-gradient(90deg, #667eea, #764ba2); height: 100%; width: ${progressPercentage}%; transition: width 0.3s ease;"></div>
                                 </div>
                             </div>
                             
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin: 12px 0;">
-                                <div style="display: flex; gap: 15px;">
+                            <!-- Decision -->
+                            <div style="background: #f8f9fa; border-left: 4px solid ${goodVotes > badVotes ? '#4caf50' : '#f44336'}; padding: 12px; border-radius: 4px; margin-bottom: 15px;">
+                                <div style="font-weight: bold; color: #333; margin-bottom: 4px;">Community Decision:</div>
+                                <div style="font-weight: bold; color: ${goodVotes > badVotes ? '#4caf50' : '#f44336'};">${decisionResult}</div>
+                                <div style="display: flex; gap: 20px; margin-top: 8px; font-size: 0.9rem;">
                                     ${idea.type === 'choice' ? `
-                                        <span style="color: #2ed573; font-weight: bold;">👈 ${idea.choiceA}: ${idea.votes.a || 0}</span>
-                                        <span style="color: #ff4757; font-weight: bold;">👉 ${idea.choiceB}: ${idea.votes.b || 0}</span>
+                                        <span>${idea.choiceA}: <strong>${idea.votes.a || 0}</strong></span>
+                                        <span>${idea.choiceB}: <strong>${idea.votes.b || 0}</strong></span>
                                     ` : `
-                                        <span style="color: #2ed573; font-weight: bold;">👍 ${idea.votes.good || 0}</span>
-                                        <span style="color: #ff4757; font-weight: bold;">👎 ${idea.votes.bad || 0}</span>
+                                        <span>👍 Good: <strong>${idea.votes.good || 0}</strong></span>
+                                        <span>👎 Bad: <strong>${idea.votes.bad || 0}</strong></span>
                                     `}
                                 </div>
-                                <span style="color: #667eea; font-weight: bold; font-size: 0.9rem;">Following</span>
                             </div>
                             
-                            ${outcomeStatus === 'Completed' ? `
-                                <div style="background: #f8f9fa; border-left: 4px solid #4caf50; padding: 12px; border-radius: 4px; margin-top: 12px;">
-                                    <div style="font-weight: bold; color: #333; margin-bottom: 4px;">Final Decision:</div>
-                                    <div style="color: #4caf50; font-weight: bold;">${decisionResult}</div>
+                             <!-- Submitter Update -->
+                            ${idea.outcome && idea.outcome.update ? `
+                                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #f0f0f0;">
+                                    <div style="font-weight: bold; color: #333; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                                        <span style="background: #667eea; color: white; width: 30px; height: 30px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.9rem;">${idea.author.charAt(0)}</span>
+                                        Submitter's Update
+                                    </div>
+                                    <p style="background: #f8f9fa; padding: 12px; border-radius: 8px; color: #444; line-height: 1.5; margin: 0;">${idea.outcome.update}</p>
+                                    <p style="text-align: right; font-size: 0.8rem; color: #888; margin: 8px 0 0 0;">${idea.outcome.updateDate}</p>
                                 </div>
                             ` : ''}
-                            
-                            <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #eee; display: flex; justify-content: space-between; align-items: center;">
-                                <button style="background: #667eea; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;" onclick="unfollowIdea(${idea.id})">Unfollow</button>
-                                <button style="background: #f0f0f0; color: #666; border: none; padding: 6px 12px; border-radius: 6px; font-size: 0.8rem; cursor: pointer;" onclick="shareOutcome(${idea.id})">Share</button>
+
+                            <!-- Actions -->
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                                <button style="background: #e3e3e3; color: #333; border: none; padding: 8px 14px; border-radius: 8px; font-size: 0.8rem; cursor: pointer; font-weight: 500;" onclick="unfollowIdea(${idea.id})">Unfollow</button>
+                                <button style="background: #667eea; color: white; border: none; padding: 8px 14px; border-radius: 8px; font-size: 0.8rem; cursor: pointer; font-weight: 500;" onclick="shareOutcome(${idea.id})">Share</button>
                             </div>
                         </div>
                     `;
@@ -5337,6 +5546,122 @@
                 }
             }
         }
+
+        // User vote history data model
+        let userHistory = [];
+        const VOTE_CHANGE_TIME_LIMIT = 10 * 60 * 1000; // 10 minutes
+        const VOTE_CHANGE_DAILY_LIMIT = 3;
+        let voteChangesToday = 0;
+        let lastVoteChangeDate = new Date().toDateString();
+
+        function recordUserHistory(idea, userVote) {
+            // Remove any previous entry for this idea
+            userHistory = userHistory.filter(entry => entry.id !== idea.id);
+            userHistory.unshift({
+                id: idea.id,
+                title: idea.title,
+                type: idea.type,
+                userVote,
+                voteTime: Date.now(),
+                canChange: true,
+                previousVotes: [],
+            });
+        }
+
+        function updateUserHistoryVote(ideaId, newVote) {
+            const entry = userHistory.find(e => e.id === ideaId);
+            if (entry) {
+                entry.previousVotes.push({ vote: entry.userVote, time: entry.voteTime });
+                entry.userVote = newVote;
+                entry.voteTime = Date.now();
+                entry.canChange = false;
+            }
+        }
+
+        function canChangeVote(entry) {
+            // Limit by time and daily count
+            const now = Date.now();
+            const today = new Date().toDateString();
+            if (today !== lastVoteChangeDate) {
+                voteChangesToday = 0;
+                lastVoteChangeDate = today;
+            }
+            if (voteChangesToday >= VOTE_CHANGE_DAILY_LIMIT) return false;
+            if (now - entry.voteTime > VOTE_CHANGE_TIME_LIMIT) return false;
+            return true;
+        }
+
+        function openHistoryModal() {
+            renderHistoryList();
+            document.getElementById('historyModal').style.display = 'flex';
+        }
+        function closeHistoryModal() {
+            document.getElementById('historyModal').style.display = 'none';
+        }
+
+        function renderHistoryList() {
+            const list = document.getElementById('historyList');
+            if (userHistory.length === 0) {
+                list.innerHTML = '<div style="text-align:center; color:#888; padding:30px 0;">No voting history yet.<br>Start voting to see your choices here!</div>';
+                return;
+            }
+            list.innerHTML = userHistory.map((entry, idx) => {
+                const idea = ideas.find(i => i.id === entry.id);
+                let voteContent = '';
+                if (entry.userVote === 'good') {
+                    voteContent = '<span style="font-size:1.1em;color:#2ed573;">👍</span>';
+                } else if (entry.userVote === 'bad') {
+                    voteContent = '<span style="font-size:1.1em;color:#ff4d4d;">👎</span>';
+                } else if (entry.userVote === 'a') {
+                    voteContent = `<span style=\"color:#4d7cff;font-size:0.98em;max-width:120px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;display:inline-block;vertical-align:middle;\">${idea && idea.choiceA ? idea.choiceA : 'A'}</span>`;
+                } else if (entry.userVote === 'b') {
+                    voteContent = `<span style=\"color:#a259e6;font-size:0.98em;max-width:120px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;display:inline-block;vertical-align:middle;\">${idea && idea.choiceB ? idea.choiceB : 'B'}</span>`;
+                } else if (entry.userVote === 'skip') {
+                    voteContent = '<span style="font-size:1.1em;color:#ffd700;">⏭️</span>';
+                }
+                let canChange = entry.userVote !== 'skip' && canChangeVote(entry);
+                let canRevisit = entry.userVote === 'skip';
+                let actionSymbol = '';
+                if (canChange) actionSymbol = '<span title="You can change your vote" style="margin-left:6px; color:#667eea; font-size:1.1em; cursor:pointer;">✏️</span>';
+                else if (canRevisit) actionSymbol = '<span title="Revisit skipped question" style="margin-left:6px; color:#ffd700; font-size:1.1em; cursor:pointer;">↩️</span>';
+                // Make title a link that revisits/changes vote
+                let actionHandler = canChange ? `changeVoteFromHistory(${entry.id})` : canRevisit ? `revisitSkippedFromHistory(${entry.id})` : '';
+                let titleLink = actionHandler ? `<a href=\"#\" onclick=\"${actionHandler};return false;\" style=\"color:#333; text-decoration:underline; font-weight:600;\">${entry.title}</a>` : `<span style=\"font-weight:600; color:#333;\">${entry.title}</span>`;
+                // Add most recent indicator to the first entry
+                let recentBadge = idx === 0 ? '<span class="most-recent-badge" style="background:#667eea;color:white;border-radius:8px;padding:2px 8px;font-size:0.75em;margin-left:10px;vertical-align:middle;">Most Recent</span>' : '';
+                return `
+                    <div class=\"history-entry\" style=\"display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid #eee;font-size:0.93em;\">
+                        <span class=\"history-question-title\" style=\"flex:1;min-width:0;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-size:0.97em;\">${titleLink}${actionSymbol}${recentBadge}</span>
+                        <span class=\"history-vote\">${voteContent}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function changeVoteFromHistory(ideaId) {
+            // Set up to revisit the idea and allow vote change
+            const idx = shuffledIdeas.findIndex(i => i.id === ideaId);
+            if (idx !== -1) {
+                currentIdeaIndex = idx;
+                showTab('voting');
+                loadNextIdea();
+                closeHistoryModal();
+                // Mark vote change
+                voteChangesToday++;
+            }
+        }
+        function revisitSkippedFromHistory(ideaId) {
+            // Set up to revisit the idea
+            const idx = shuffledIdeas.findIndex(i => i.id === ideaId);
+            if (idx !== -1) {
+                currentIdeaIndex = idx;
+                showTab('voting');
+                loadNextIdea();
+                closeHistoryModal();
+            }
+        }
+
+
     </script>
 </body>
 </html> 
